@@ -38,7 +38,7 @@ class AdminLayout extends Component {
     checkUser=()=>{
         if(localStorage.getItem('user')){
             //set role
-            this.props.onLoggedIn({role:"sender"})
+            // this.props.onLoggedIn({role:"sender"})
             let user = JSON.parse(localStorage.getItem('user'))
             user.role="sender"
             this.props.onLoggedIn(user)

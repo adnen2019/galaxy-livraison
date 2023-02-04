@@ -1,7 +1,8 @@
-import { addDoc, collection } from "firebase/firestore";
+import {ref, set } from "firebase/database";
 import { db } from "../../firebase-config";
 
-export default AddPackage=async(data) => {
-    const packagesCollectionRef = collection(db, "packages");
-      await addDoc(packagesCollectionRef, data);
+export const AddPackage=async(data) => {
+ let res=await set(ref(db, 'ListPickup/'+ data.serieColis), data);
+ console.log(res);
 }
+

@@ -22,7 +22,10 @@ export default class Routes extends Component {
     this.user = React.createRef({});
     this.user.current = { role: "" };
     if(localStorage.getItem('user')){
-      this.user.current.role="sender"}
+      this.user.current.role="sender"
+      const user=JSON.parse(localStorage.getItem('user'))
+      this.user.current={role:'sender',...user}
+    }
 
     // this.jwtVerify();
     this.state = {
@@ -96,7 +99,7 @@ export default class Routes extends Component {
                 />
               
                 <SenderRouter role={this.user.current.role} exact path="/sender/packages">
-                  <PackageList/>
+                  <PackageList userId={this.user.current.idExpiditeur} />
                 </SenderRouter>
                 <SenderRouter  role={this.user.current.role} exact path="/sender/dashboard">
                   {/* <ManageJobPostsView userId={this.user.current.id} /> */}

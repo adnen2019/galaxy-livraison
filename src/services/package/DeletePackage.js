@@ -1,6 +1,8 @@
-import { deleteDoc, doc } from "firebase/firestore";
+import {ref, remove } from "firebase/database";
+import { db } from "../../firebase-config";
 
-export default DeletePackage=async(id) => {
-        const userDoc = doc(db, "packages", id);
-        await deleteDoc(userDoc);
+export const DeletePackage=async(data) => {
+ let res=await remove(ref(db, 'ListPickup/'+ data.serieColis));
+ console.log(res);
 }
+

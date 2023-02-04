@@ -8,7 +8,12 @@ import App from "./App/index";
 import * as serviceWorker from "./serviceWorker";
 import reducer from "./store/reducer";
 import config from "./config";
+import { createBrowserHistory } from 'history';
 
+
+export const history = createBrowserHistory({
+    basename: process.env.PUBLIC_URL
+});
 const store = createStore(reducer);
 
 const app = (

@@ -1,7 +1,8 @@
-import { doc, updateDoc } from "firebase/firestore";
+import {ref, update } from "firebase/database";
+import { db } from "../../firebase-config";
 
-export default UpdatePackage=async(data)=> {
-        const userDoc = doc(db, "packages", data.id);
-        // const newFields = { age: age + 1 };
-        await updateDoc(userDoc, data);
+export const UpdatePackage=async(data) => {
+ let res=await update(ref(db, 'ListPickup/'+ data.serieColis), data);
+ console.log(res);
 }
+

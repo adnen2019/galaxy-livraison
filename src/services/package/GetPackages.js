@@ -1,15 +1,18 @@
-import { onValue, ref} from "firebase/database";
-import { collection, getDocs, query, where } from "firebase/firestore";
+import { equalTo, onValue, orderByChild, query, ref} from "firebase/database";
+// import { collection, getDocs, query, where } from "firebase/firestore";
 import { db } from "../../firebase-config";
 
 export  const GetPackages=async(id,cb,setLoading) => {
     try {
       setLoading(true)
-        const query = ref(db, "ListPickup")
-         onValue(query, (snapshot) => {
+      const request =query(ref(db, 'ListPickup')
+      , orderByChild('idExpiditeur')
+      ,equalTo(id)
+      );
+         onValue(request, (snapshot) => {
           const data = snapshot.val();
           if (snapshot.exists()) {
-           let packages= Object.values(data).filter((p) =>p.idExpiditeur==id );
+           let packages= Object.values(data)
            console.log(packages);
           //  let states=packages.map(p=>p.etatLivraison)
           //  states=[...new Set([...states])]
@@ -18,9 +21,6 @@ export  const GetPackages=async(id,cb,setLoading) => {
            setLoading(false)
           }
         });
-        // const userRef = collection(db, "ListLivreur");
-        // const q = query(userRef, where('emailExpiditeur', '==', email));
-        // const query = userRef.where('emailExpiditeur', '==', email);
         
       } catch (err) {
         alert(err.message);

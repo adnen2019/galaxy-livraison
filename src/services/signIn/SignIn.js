@@ -1,14 +1,15 @@
-import { collection, getDocs, query, where } from "firebase/firestore";
+// import { collection, getDocs, query, where } from "firebase/firestore";
 import { db } from "../../firebase-config";
-import { onValue, ref } from "firebase/database";
+import { equalTo, onValue, orderByChild, query, ref } from "firebase/database";
 
 export const SignIn = async (email, password) => {
     try {
-      const query = ref(db, "ListExpiditeur")
-       onValue(query, (snapshot) => {
+      const request =query(ref(db, 'ListExpiditeur'), orderByChild('emailExpiditeur'),equalTo(email));
+       onValue(request, (snapshot) => {
         const data = snapshot.val();
         if (snapshot.exists()) {
-         let user= Object.values(data).find((user) =>user.emailExpiditeur==email&&user.motdepasseExpiditeur==password );
+          console.log(data);
+         let user= Object.values(data).find((user) =>user.motdepasseExpiditeur==password );
          if(user){
           localStorage.setItem("user",JSON.stringify(user))
           window.location.replace('/sender/packages');
@@ -16,6 +17,7 @@ export const SignIn = async (email, password) => {
          else{alert('email ou mot de passe incorrect')}
         }
       });
+      // const topUserPostsRef = query(ref(db, 'user-posts/' + myUserId), orderByChild('starCount'));
       // const userRef = collection(db, "ListLivreur");
       // const q = query(userRef, where('emailExpiditeur', '==', email));
       // const query = userRef.where('emailExpiditeur', '==', email);
