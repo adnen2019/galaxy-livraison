@@ -2,6 +2,7 @@ import React from 'react'
 import { InboxOutlined } from '@ant-design/icons';
 import { message, Upload } from 'antd';
 import { SheetToJson } from '../../utils/SheetToJson';
+import DownloadExample from './DownloadExample';
 const { Dragger } = Upload;
 /* list of supported file types */
 const SheetJSFT = [
@@ -50,6 +51,7 @@ const draggerProps = {
   },
 };
 const DraggerComponent = (props) => (
+  <>
   <Dragger onChange={props.handleFile}  {...draggerProps}>
     <p className="ant-upload-drag-icon">
       <InboxOutlined />
@@ -59,5 +61,7 @@ const DraggerComponent = (props) => (
     Prise en charge d'un téléchargement unique
     </p>
   </Dragger>
+  <DownloadExample/>
+  </>
 );
 export default DraggerComponent;

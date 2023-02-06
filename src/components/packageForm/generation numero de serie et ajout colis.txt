@@ -1,0 +1,103 @@
+//Ajouter colis au base de donne fireBase
+                final ColiExpiditeur fc = new ColiExpiditeur();
+//formule date et temp
+                String currentDateTime = (new SimpleDateFormat("dd/MM/yyyy").format(Calendar.getInstance().getTime()));
+                String currentDateTime22 = (new SimpleDateFormat("HH:mm").format(Calendar.getInstance().getTime()));
+//formule du numero de serie
+                sdate = new SimpleDateFormat("MMddHHmmssSS").format(Calendar.getInstance().getTime());
+               //Condition de creation colis si on va modifier le colis le numero de serie rest le mem 
+                if (cocitionmodifiercoli.equals("0")){message=ericolis;}else {message=idexpiditeur+sdate;
+}
+
+// prix de colis = prix ecrit plus le frais de livraison enrigistrer pour l'expiditeur
+pprixx= Float.parseFloat(prix.getText().toString())+Float.parseFloat(fraiLiv.getText().toString());
+            fc.setSerieColis(message);
+
+            //ville du distinataire 
+                fc.setAgenceLivraison(vil);
+
+                fc.setDatAjoutColis(currentDateTime+"|"+currentDateTime22);
+
+                fc.setEtaPayment("Non Payer");
+
+                fc.setDatLivraison("00");
+
+                fc.setDateRetourDifinitif("00");
+
+                fc.setDateRetour("00");
+
+                //ville du distinataire 
+                //nafsha elli lfou9
+                fc.setVilDistinateur(vil);
+
+
+                fc.setEtatLivraison("Collect");
+
+                fc.setLivreur("Expiditeur");
+
+                fc.setTelLivreur("0");
+
+                //detail de l'expiditeur qui sont importer de la base de donner selon le non a l'autantification
+                fc.setNomExpiditeur(userName);
+                fc.setNumeroExpiditeur(telxpiditeur);
+                fc.setVillExpiditeur(vilexpid);
+                fc.setFraiLivraison(fraiLivraison);
+                fc.setFraiRetour(frairetour);
+                fc.setFraiLivExtra(fraisextraLivraison);
+                fc.setIdExpiditeur(idexpiditeur);
+
+                //detail du distinataire
+                fc.setNomDistinateur(non.getText().toString());
+                fc.setTelDistinatair(tel.getText().toString());
+                fc.setAdressDistinatair(adress.getText().toString());
+
+                fc.setRaisonRetour("=>");
+
+                fc.setNombreTentative("0");
+
+                fc.setNombreSms("0");
+
+                fc.setNombreTel("0");
+
+                fc.setNumeroRinchit("0");
+
+                fc.setDateRinchit("0");
+
+                fc.setNumeroFacture("0");
+
+                fc.setDateFactur("0");
+
+                if (switt1.isChecked()) {fc.setNaturPayment("Cheque/Espece");} 
+                else {fc.setNaturPayment("Espece");}
+
+            if (switt2.isChecked()) {fc.setPrisColis("0");}
+             else {fc.setPrisColis(String.valueOf(pprixx));}
+
+                if (SwitchDemo.isChecked()) {fc.setNaturColis("Gros Colis");
+                    fc.setDicriptionColis(descri.getText().toString()+"/h:"+h.getText().toString()+"/Log:"+lon.getText().toString()+"/Lar:"+lar.getText().toString());
+                }else  if (box2.isChecked()) {fc.setNaturColis("Document");
+                    fc.setDicriptionColis(descri.getText().toString());
+                } else {fc.setNaturColis("Colis");
+                    fc.setDicriptionColis(descri.getText().toString());}
+
+                if (btnch.isChecked()) {fc.setEchangColis("Echange"+"champ elli bech tektbou");} else {fc.setEchangColis("Livraison Normal");}
+               
+                fc.setColis1("0");
+                fc.setColis2("0");
+                fc.setColis3("0");
+                fc.setColis4("0");
+                
+                fc.setDetailColi(poid.getText().toString()+" kg // "+nombre.getText().toString()+" Pieces");
+                fc.setJournalColis("Creation par: "+nomexpiditeur+" le "+currentDateTime+"|"+currentDateTime22);
+
+                Firebase ref1 = new Firebase(FIREBASE_URL);
+                final Firebase idref = ref1.child("ListPickup");
+                idref.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+
+                        Firebase Numfacture = idref.child(message);
+                        Numfacture.setValue(fc);
+
+                        Toast T = Toast.makeText(AjouterColis.this, "insertion terminer avec succée", Toast.LENGTH_SHORT);
+                        T.show();

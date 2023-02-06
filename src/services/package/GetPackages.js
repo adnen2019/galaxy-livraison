@@ -14,11 +14,12 @@ export  const GetPackages=async(id,cb,setLoading) => {
           if (snapshot.exists()) {
            let packages= Object.values(data)
            console.log(packages);
+           cb(packages)
+           setLoading(false)
           //  let states=packages.map(p=>p.etatLivraison)
           //  states=[...new Set([...states])]
           //  console.log(states);
-           cb(packages)
-           setLoading(false)
+     
           }
         });
         
