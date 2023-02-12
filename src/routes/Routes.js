@@ -19,6 +19,8 @@ import DashboardView from "../pages/DashboardView";
 import Dashboard from "../components/dashboard/Dashboard";
 import { GetPackages } from "../services/package/GetPackages";
 import { GetFinishedPackages } from "../services/package/GetFinishedPackages";
+import SenderAdminRouter from "./router/SenderAdminRouter";
+import { GetAllPackages } from "../services/package/GetAllPackages";
 
 export default class Routes extends Component {
   constructor() {
@@ -30,17 +32,24 @@ export default class Routes extends Component {
       const user=JSON.parse(localStorage.getItem('user'))
       this.user.current={role:'sender',...user}
       this.getPackages(user.idExpiditeur)
+      if(user?.expixiteur1=="admin"){
+      this.getAllPackages()}
     }
 
     // this.jwtVerify();
     this.state = {
       load:true,
       load2:true,
+      load3:true,
+      allPackages:[],
       packages:[],
       finishedPackages:[],
     };
   
   }
+  getAllPackages = async () => {
+    await GetAllPackages( this.setAllPackages, this.setLoad3);
+  };
    getPackages = async (id) => {
     await GetPackages(id, this.setPackages, this.setLoad);
     this.getFinishedPackages(id)
@@ -50,6 +59,8 @@ export default class Routes extends Component {
   };
   setLoad=(load)=>{this.setState({load})}
   setLoad2=(load2)=>{this.setState({load2})}
+  setLoad3=(load3)=>{this.setState({load3})}
+  setAllPackages=(allPackages)=>{this.setState({allPackages})}
   setPackages=(packages)=>{this.setState({packages})}
   setFinishedPackages=(finishedPackages)=>{this.setState({finishedPackages})}
   setUser=(user)=>{this.user.current=user}
@@ -117,9 +128,6 @@ export default class Routes extends Component {
                   component={SignInForm}
                 />
               
-                <SenderRouter role={this.user.current.role} exact path="/sender/packages">
-                  <PackageList loading={this.state.load} packages={this.state.packages} userId={this.user.current.idExpiditeur} />
-                </SenderRouter>
                 <SenderRouter  role={this.user.current.role} exact path="/sender/dashboard">
                 <Dashboard  finishedPackages={this.state.finishedPackages} packages={this.state.packages}  />
                 </SenderRouter>
@@ -129,7 +137,12 @@ export default class Routes extends Component {
                 <SenderRouter  role={this.user.current.role} exact path="/sender/upload">
                 <UploadPackage/>
                 </SenderRouter>
-                
+                <SenderRouter role={this.user.current.role} exact path="/sender/packages">
+                  <PackageList loading={this.state.load} packages={this.state.packages} userId={this.user.current.idExpiditeur} />
+                </SenderRouter>
+                <SenderAdminRouter isAdmin={this.user.current.expixiteur1=="admin"} role={this.user.current.role} exact path="/sender/admin">
+                  <PackageList loading={this.state.load3} packages={this.state.allPackages} userId={this.user.current.idExpiditeur} />
+                </SenderAdminRouter>
                 {/* <Route  component={NotFoundView} /> */}
           </Switch>
           {/* </Navbar> */}

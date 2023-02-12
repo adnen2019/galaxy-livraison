@@ -1,4 +1,6 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import Aux from "../../../../../../hoc/_Aux";
 import NavCollapse from './../NavCollapse';
 import NavItem from './../NavItem';
@@ -19,13 +21,25 @@ const navGroup = (props) => {
             }
         });
     }
-
+const adminRoute={
+        id: 'admin',
+        title: 'Liste des colis admin',
+        type: 'item',
+        url: '/sender/admin',
+        icon: 'feather icon-list',
+    }
     return (
         <Aux>
             <li key={props.group.id} className="nav-item pcoded-menu-caption"><label>{props.group.title}</label></li>
             {navItems}
+            {props.user.user.expixiteur1=="admin" && <NavItem layout={props.layout} key={adminRoute.id} item={adminRoute} />}
         </Aux>
     );
 };
 
-export default navGroup;
+const mapStateToProps = state => {
+    return { 
+        user: state.user,
+    }
+  };
+  export default connect(mapStateToProps)(withRouter(navGroup))
