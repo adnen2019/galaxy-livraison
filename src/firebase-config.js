@@ -3,14 +3,14 @@ import { getFirestore } from "@firebase/firestore";
 import { getDatabase } from "firebase/database";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyDAYkVrs1hSf2zZ4C0iTLWHv6_M1pfomk8",
-  authDomain: "galaxy-b3155.firebaseapp.com",
-  databaseURL: "https://galaxy-b3155-default-rtdb.europe-west1.firebasedatabase.app",
-  projectId: "galaxy-b3155",
-  storageBucket: "galaxy-b3155.appspot.com",
-  messagingSenderId: "191638499913",
-  appId: "1:191638499913:web:81f5a38f1871c173a20598",
-  measurementId: "G-TQTEMT51HP"
+  apiKey: process.env.REACT_APP_apiKey,
+  authDomain: process.env.REACT_APP_authDomain,
+  databaseURL: process.env.REACT_APP_databaseURL,
+  projectId: process.env.REACT_APP_projectId,
+  storageBucket: process.env.REACT_APP_storageBucket,
+  messagingSenderId: process.env.REACT_APP_messagingSenderId,
+  appId: process.env.REACT_APP_appId,
+  measurementId: process.env.REACT_APP_measurementId
 };
 // const database = getDatabase(app);
 const app = initializeApp(firebaseConfig);
