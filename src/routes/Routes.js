@@ -15,6 +15,10 @@ import PackageList from "../components/packagesList/PackageList";
 import HomeView from "../pages/home/HomeView";
 import UploadPackage from "../components/uploadPackage/UploadPackage";
 import PackageForm from "../components/packageForm/PackageForm";
+import DashboardView from "../pages/DashboardView";
+import Dashboard from "../components/dashboard/Dashboard";
+import { GetPackages } from "../services/package/GetPackages";
+import { GetFinishedPackages } from "../services/package/GetFinishedPackages";
 
 export default class Routes extends Component {
   constructor() {
@@ -25,14 +29,29 @@ export default class Routes extends Component {
       this.user.current.role="sender"
       const user=JSON.parse(localStorage.getItem('user'))
       this.user.current={role:'sender',...user}
+      this.getPackages(user.idExpiditeur)
     }
 
     // this.jwtVerify();
     this.state = {
-      load:true
+      load:true,
+      load2:true,
+      packages:[],
+      finishedPackages:[],
     };
+  
   }
+   getPackages = async (id) => {
+    await GetPackages(id, this.setPackages, this.setLoad);
+    this.getFinishedPackages(id)
+  };
+  getFinishedPackages = async (id) => {
+    await GetFinishedPackages(id, this.setFinishedPackages, this.setLoad2);
+  };
   setLoad=(load)=>{this.setState({load})}
+  setLoad2=(load2)=>{this.setState({load2})}
+  setPackages=(packages)=>{this.setState({packages})}
+  setFinishedPackages=(finishedPackages)=>{this.setState({finishedPackages})}
   setUser=(user)=>{this.user.current=user}
   
 
@@ -99,10 +118,10 @@ export default class Routes extends Component {
                 />
               
                 <SenderRouter role={this.user.current.role} exact path="/sender/packages">
-                  <PackageList userId={this.user.current.idExpiditeur} />
+                  <PackageList loading={this.state.load} packages={this.state.packages} userId={this.user.current.idExpiditeur} />
                 </SenderRouter>
                 <SenderRouter  role={this.user.current.role} exact path="/sender/dashboard">
-                  {/* <ManageJobPostsView userId={this.user.current.id} /> */}
+                <Dashboard  finishedPackages={this.state.finishedPackages} packages={this.state.packages}  />
                 </SenderRouter>
                 <SenderRouter  role={this.user.current.role} exact path="/sender/packageForm">
                   <PackageForm/>

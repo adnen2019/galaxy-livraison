@@ -1,23 +1,44 @@
 import React, { useEffect, useState } from "react";
 import { GetPackages } from "../../services/package/GetPackages";
-import { Input, Select, Table } from "antd";
+import { Input, Modal, Select, Table } from "antd";
 import { useHistory, withRouter } from "react-router-dom";
 import { JsonToCsv } from "../../utils/JsonToCsv";
 import { connect } from "react-redux";
+import { DeletePackage } from "../../services/package/DeletePackage";
+import { ExclamationCircleOutlined } from "@ant-design/icons";
+import BillModal from "../bill/BillModal";
 const { Column } = Table;
 const { Option } = Select;
 
 function PackageList(props) {
   const [filteredPackages, setFilteredPackages] = useState([]);
   const [packages, setPackages] = useState([]);
-  const [loading, setLoading] = useState(true);
   const [filterInput, setFilterInput] = useState("");
   const [filterSelect, setFilterSelect] = useState("Collect");
   const [selectedRowKeys, setSelectedRowKeys] = useState([]);
+  const [modalVisible,setModalVisible]=useState(false)
+  const [pkg,setPkg]=useState({})
 
+  const deletePackage=(pkg)=>{
+    if(pkg.etatLivraison=="Collect"){
+    Modal.confirm({
+      title: "Supprimer offre",
+      icon: <ExclamationCircleOutlined />,
+      content:
+        "voulez vous supprimer ce colis ",
+      okText: "Supprimer",
+      okType: "danger",
+      cancelText: "Annuler",
+      onOk: () => {
+        DeletePackage(pkg.serieColis)
+        // this.Delete(jobPost._id, index);
+      },
+      // onCancel:()=>{alert(index)}
+    });}
+  }
   const exportAsFile = () => {
     console.log(selectedRowKeys);
-    let list = packages.filter((pkg) =>
+    let list = props.packages.filter((pkg) =>
       selectedRowKeys.includes(pkg.serieColis)
     );
     list = list.map((pkg) => ({
@@ -55,9 +76,9 @@ function PackageList(props) {
     }
   };
   const history = useHistory({});
-  const getPackages = async () => {
-    await GetPackages(props.userId, handlePackages, setLoading);
-  };
+  // const getPackages = async () => {
+  //   await GetPackages(props.userId, handlePackages, setLoading);
+  // };
   const handlePackages = (value) => {
     setPackages(value);
     setFilteredPackages(value.filter((p) => p.etatLivraison == "Collect"));
@@ -65,14 +86,32 @@ function PackageList(props) {
   const handleChange = (value) => {
     setFilterSelect(value);
     if (value == "Tout") {
-      setFilteredPackages(packages);
+      setFilteredPackages(props.packages);
     } else
-      setFilteredPackages(packages.filter((p) => p.etatLivraison == value));
+      setFilteredPackages(props.packages.filter((p) => p.etatLivraison == value));
   };
   useEffect(() => {
-    console.log("packages list component", props);
-    getPackages();
-  }, []);
+    handlePackages(props.packages);
+  }, [props.packages]);
+  let filteredData=filteredPackages
+  if (filterInput != "")
+  {filteredData = filteredData.filter((pkg) => {
+    let filter = filterInput.toLowerCase();
+
+    let telDistinatair=pkg.telDistinatair.toString()
+    let serieColis=pkg.serieColis.toString()
+    let vilDistinateur=pkg.vilDistinateur.toLowerCase()
+    let nomDistinateur=pkg.nomDistinateur.toLowerCase()
+    let prisColis=pkg.prisColis.toString()
+    let adressDistinatair=pkg.adressDistinatair.toLowerCase()
+    let dicriptionColis=pkg.dicriptionColis.toLowerCase()
+    
+
+    return  (telDistinatair.includes(filter)||serieColis.includes(filter)||vilDistinateur.includes(filter)||
+    nomDistinateur.includes(filter)||prisColis.includes(filter)||adressDistinatair.includes(filter)||
+    dicriptionColis.includes(filter)) 
+    
+  });}
   return (
     <>
       <div className="d-flex justify-content-center align-items-center">
@@ -125,8 +164,8 @@ function PackageList(props) {
         rowKey={(colis) => colis.serieColis}
         // hideSelectAll={false}
         // pagination={false}
-        loading={loading}
-        dataSource={filteredPackages}
+        loading={props.loading}
+        dataSource={filteredData}
       >
         <Column
           align="center"
@@ -189,12 +228,14 @@ function PackageList(props) {
           title="Actions"
           dataIndex="Actions"
           key="Actions"
-          render={(text, question, index) => {
+          render={(text, pkg, index) => {
             return (
               <div className="">
-                <i className="feather icon-eye m-1"></i>
+                <i onClick={()=>{setPkg(pkg)
+                setModalVisible(true)
+                }} className="feather icon-eye m-1"></i>
                 <i className="feather icon-edit m-1"></i>
-                <i className="feather icon-trash-2 m-1"></i>
+                <span role="button" ><i  onClick={()=>deletePackage(pkg)} className="feather icon-trash-2 m-1"></i></span>
               </div>
             );
           }}
@@ -205,6 +246,8 @@ function PackageList(props) {
           Exporter
         </button>
       </div>
+      {modalVisible&&<BillModal pkg={pkg} modalVisible={modalVisible} setModalVisible={setModalVisible} />}
+
     </>
   );
 }

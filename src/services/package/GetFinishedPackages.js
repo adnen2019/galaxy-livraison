@@ -2,10 +2,10 @@ import { equalTo, onValue, orderByChild, query, ref} from "firebase/database";
 // import { collection, getDocs, query, where } from "firebase/firestore";
 import { db } from "../../firebase-config";
 
-export  const GetPackages=async(id,cb,setLoading) => {
+export  const GetFinishedPackages=async(id,cb,setLoading) => {
     try {
       setLoading(true)
-      const request =query(ref(db, 'ListPickup')
+      const request =query(ref(db, 'ColisFini')
       , orderByChild('idExpiditeur')
       ,equalTo(id),
       );

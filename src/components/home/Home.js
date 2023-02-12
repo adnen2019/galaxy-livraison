@@ -5,13 +5,16 @@ import logo from "../../assets/images/logo.png"
 export default function Home() {
   const history=useHistory()
   return (
-    <div className='d-flex justify-content-center mt-5 align-items-center' >
-      <div className='text-center' >
+    <div className='row mt-5 align-items-center' >
+      <div className='text-center col-md-6 col-sm-12' >
       <img height={"180"} src={logo} />
       <br/>
       <button onClick={()=>{history.push("/signIn")}} className='btn btn-primary btn-lg rounded-pill' >Login</button>
       </div>
-      <img height={"400"} src={img} />
+      <div className=' col-md-6 col-sm-12'>
+      <img className='w-75' src={img} />
+
+      </div>
     </div>
   )
 }

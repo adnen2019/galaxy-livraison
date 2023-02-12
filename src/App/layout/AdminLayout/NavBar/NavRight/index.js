@@ -21,7 +21,7 @@ console.log(this.props);
         return (
             <Aux>
                 <ul className="navbar-nav ml-auto">
-                    <li>
+                    {/* <li>
                         <Dropdown alignRight={!this.props.rtlLayout}>
                             <Dropdown.Toggle variant={'link'} id="dropdown-basic">
                                 <i className="icon feather icon-bell"/>
@@ -77,10 +77,10 @@ console.log(this.props);
                                 </div>
                             </Dropdown.Menu>
                         </Dropdown>
-                    </li>
-                    <li className={this.props.rtlLayout ? 'm-r-15' : 'm-l-15'}>
+                    </li> */}
+                    {/* <li className={this.props.rtlLayout ? 'm-r-15' : 'm-l-15'}>
                         <a href={DEMO.BLANK_LINK} className="displayChatbox" onClick={() => {this.setState({listOpen: true});}}><i className="icon feather icon-mail"/></a>
-                    </li>
+                    </li> */}
                     <li>
                         <Dropdown alignRight={!this.props.rtlLayout} className="drp-user">
                             <Dropdown.Toggle variant={'link'} id="dropdown-basic">
@@ -90,21 +90,18 @@ console.log(this.props);
                                 <div className="pro-head">
                                     <img src={Avatar2} className="img-radius" alt="User Profile"/>
                                     <span>{this.props.user.user.nomExpiditeur}</span>
-                                    <span role="button" onClick={()=>{this.props.history.push("/logout")}} className="dud-logout" title="Logout">
+                                    {/* <span role="button"  className="dud-logout" title="Logout">
                                         <i className="feather icon-log-out"/>
-                                    </span>
+                                    </span> */}
                                 </div>
                                 <ul className="pro-body">
-                                    <li><a href={DEMO.BLANK_LINK} className="dropdown-item"><i className="feather icon-settings"/> Settings</a></li>
-                                    <li><a href={DEMO.BLANK_LINK} className="dropdown-item"><i className="feather icon-user"/> Profile</a></li>
-                                    <li><a href={DEMO.BLANK_LINK} className="dropdown-item"><i className="feather icon-mail"/> My Messages</a></li>
-                                    <li><a href={DEMO.BLANK_LINK} className="dropdown-item"><i className="feather icon-lock"/> Lock Screen</a></li>
+                                    <li onClick={()=>{this.props.history.push("/logout")}} ><a href={"#"} className="dropdown-item"><i className="feather icon-log-out"/> Déconnecter</a></li>
                                 </ul>
                             </Dropdown.Menu>
                         </Dropdown>
                     </li>
                 </ul>
-                <ChatList listOpen={this.state.listOpen} closed={() => {this.setState({listOpen: false});}} />
+                {/* <ChatList listOpen={this.state.listOpen} closed={() => {this.setState({listOpen: false});}} /> */}
             </Aux>
         );
     }

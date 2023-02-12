@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
+import logo from "../../../../assets/images/logo.png"
 
 import NavLeft from "./NavLeft";
 import NavRight from "./NavRight";
@@ -30,15 +31,17 @@ class NavBar extends Component {
                     <div className="m-header">
                         <a className={toggleClass.join(' ')} id="mobile-collapse1" href={DEMO.BLANK_LINK} onClick={this.props.onToggleNavigation}><span/></a>
                         <a href={DEMO.BLANK_LINK} className="b-brand">
-                            <div className="b-bg">
+                            {/* <div className="b-bg">
                                 <i className="feather icon-trending-up"/>
                             </div>
-                            <span className="b-title">Galaxy livraison</span>
+                            <span className="b-title">Galaxy livraison</span> */}
+      <img height={"80"} src={logo} />
+
                         </a>
                     </div>
                     <a className="mobile-menu" id="mobile-header" href={DEMO.BLANK_LINK}><i className="feather icon-more-horizontal"/></a>
                     <div className="collapse navbar-collapse">
-                        <NavLeft/>
+                        {/* <NavLeft/> */}
                         <NavRight rtlLayout={this.props.rtlLayout} />
                     </div>
                 </header>:""}

@@ -388,8 +388,10 @@ e.preventDefault()
               <Switch
                 className="mr-1"
                 size="small"
-                checked={packageData.workAuthorization}
+                checked={packageData.naturColis=="Document"}
                 onChange={() => {
+                  let nature=packageData.naturColis=="Document"?"Colis:":"Document"
+                  setPackageData({...packageData,naturColis:nature})
                   // setState({
                   //   workAuthorization: !packageData.workAuthorization,
                   // });
