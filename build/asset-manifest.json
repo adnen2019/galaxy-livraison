@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/static/css/main.1de5e504.chunk.css",
-    "main.js": "/static/js/main.735018ad.chunk.js",
+    "main.js": "/static/js/main.40c4dc1a.chunk.js",
     "runtime~main.js": "/static/js/runtime~main.c52ca161.js",
     "static/css/2.5f56c9c5.chunk.css": "/static/css/2.5f56c9c5.chunk.css",
     "static/js/2.727051bc.chunk.js": "/static/js/2.727051bc.chunk.js",
@@ -9,11 +9,11 @@
     "static/css/4.1de5e504.chunk.css": "/static/css/4.1de5e504.chunk.css",
     "static/js/4.6dc4c1ad.chunk.js": "/static/js/4.6dc4c1ad.chunk.js",
     "index.html": "/index.html",
-    "precache-manifest.35b281c904e034ac4eed55cba8c1ea0a.js": "/precache-manifest.35b281c904e034ac4eed55cba8c1ea0a.js",
+    "precache-manifest.bdc9db687b175d11973505b798b98023.js": "/precache-manifest.bdc9db687b175d11973505b798b98023.js",
     "service-worker.js": "/service-worker.js",
     "static/media/browser.cjs": "/static/media/browser.5ef5f772.cjs",
     "static/media/delivery.png": "/static/media/delivery.3199266e.png",
-    "static/media/exemple.xlsx": "/static/media/exemple.6a53a150.xlsx",
+    "static/media/exemple.xlsx": "/static/media/exemple.e6a2976c.xlsx",
     "static/media/font-awesome.scss": "/static/media/fontawesome-webfont.fee66e71.woff",
     "static/media/logo.png": "/static/media/logo.85c109b7.png"
   }

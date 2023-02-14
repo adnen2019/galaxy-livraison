@@ -6,33 +6,34 @@ const { Option } = Select;
 export default function Dashboard(props) {
   const [gov,setGov]=useState("Tout")
   const children = [];
+
   const locationsList = [
-    "Tout",
-    "Ariana",
-    "Beja",
-    "Ben Arous",
-    "Bizerte",
-    "Gabes",
-    "Gafsa",
-    "Jendouba",
-    "Kairouan",
-    "Kasserine",
-    "Kebili",
-    "La Manouba",
-    "Le Kef",
-    "Mahdia",
-    "Medenine",
-    "Monastir",
-    "Nabeul",
-    "Sfax",
-    "Sidi Bouzid",
-    "Siliana",
-    "Sousse",
-    "Tataouine",
-    "Tozeur",
-    "Tunis",
-    "Zaghouan",
-  ];
+  "Tout"  ,
+  "Ariana",
+  "Béja",
+  "Ben Arous",
+  "Bizerte",
+  "Gabes",
+  "Gafsa",
+  "Jendouba",
+  "Kairouan",
+  "Kasserine",
+  "Kasserine",
+  "Kef",
+  "Kelibia",
+  "Manouba",
+  "Mahdia",
+  "Médenine",
+  "Monastir",
+  "Nabeul",
+  "Sfax",
+  "Sidi Bouzid",
+  "Siliana",
+  "Sousse",
+  "Tataouine",
+  "Tozeur",
+  "Tunis",
+  "Zaghouan"]
 
   for (let i = 0; i < locationsList.length; i++) {
     children.push(
@@ -49,7 +50,7 @@ export default function Dashboard(props) {
   let x2=packages.filter((pkg)=>pkg.etatLivraison=="En Cours de Verification").length
   let x3=packages.filter((pkg)=>pkg.etatLivraison=="Echange").length
   let x4=packages.filter((pkg)=>pkg.etatLivraison=="Livrer").length
-  let x5=packages.filter((pkg)=>pkg.etatLivraison=="depot").length
+  let x5=packages.filter((pkg)=>pkg.etatLivraison=="Depot").length
   let x6=packages.filter((pkg)=>pkg.etatLivraison=="Annuler").length
   let x7=packages.filter((pkg)=>pkg.etatLivraison=="Retour").length
   return (
@@ -80,7 +81,7 @@ export default function Dashboard(props) {
             "En Cours de Verification",
             "Echange",
             "Livrer",
-            "depot",
+            "Depot",
             "Annuler",
             "Retour",
           ]}
