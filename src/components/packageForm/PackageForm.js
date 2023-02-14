@@ -22,12 +22,16 @@ import {
 import { AddPackage } from "../../services/package/AddPackage";
 import { connect } from "react-redux";
 import { useHistory, withRouter } from "react-router-dom";
+import AddModal from "./AddModal";
 const { RangePicker } = DatePicker;
 const { TextArea } = Input;
 const { Option } = Select;
 
  function PackageForm(props) {
   const history=useHistory()
+
+  const [modalVisible, setModalVisible] = useState(false)
+  const [pkg, setPkg] = useState({})
 
   const [nombre, setNombre] = useState(1)
   const [poids, setPoids] = useState(1)
@@ -76,7 +80,55 @@ const { Option } = Select;
     naturColis: "Colis",
     // journalColis:"Creation par: 53491149 le 15/01/2023|17:24\n 2023-01-15 20:40 => Confirmation Pickup par le vendeur ",
   });
+const newPackage=()=>{
+  setNombre(1)
+setPoids(1)
+setHauteur("")
+setLongeur("")
+setLargeur("")
+  setPackageData({
+    //par défauts
+    colis1: "0",
+    colis2: "0",
+    colis3: "0",
+    colis4: "0",
+    etaPayment: "Non Payer",
+    datLivraison: "00",
+    dateRetourDifinitif: "00",
+    dateRetour: "00",
+    etatLivraison: "Collect",
+    livreur: "Expiditeur",
+    telLivreur: "0",
+    raisonRetour: "=>",
+    nombreTentative: "0",
+    nombreSms: "0",
+    nombreTel: "0",
+    numeroRinchit: "0",
+    dateRinchit: "0",
+    numeroFacture: "0",
+    dateFactur: "0",
+    //formulaire variables
 
+    nomDistinateur: "",
+    telDistinatair: "",
+    adressDistinatair: ""
+    ,
+    dicriptionColis: "",
+
+    vilDistinateur: "",
+    agenceLivraison: "",
+
+    prisColis: "",
+
+    // detailColi: "1 kg // 1 Pieces",
+    echangColis: "Livraison Normal",
+    naturPayment: "Espece",
+    naturColis: "Colis",
+    // journalColis:"Creation par: 53491149 le 15/01/2023|17:24\n 2023-01-15 20:40 => Confirmation Pickup par le vendeur ",
+  })
+  setModalVisible(false)
+  setPkg({})
+}
   useEffect(()=>{
     // console.log(props)
     // console.log(moment().format("DD/MM/yyyy|HH:mm"))
@@ -122,7 +174,10 @@ e.preventDefault()
          marginTop:"5rem"
        },
        });
-      history.push("/sender/dashboard")
+       //show modal
+       setPkg(data)
+       setModalVisible(true)
+      // history.push("/sender/dashboard")
     });
   };
  
@@ -141,7 +196,6 @@ e.preventDefault()
   "Gafsa",
   "Jendouba",
   "Kairouan",
-  "Kasserine",
   "Kasserine",
   "Kef",
   "Kelibia",
@@ -494,7 +548,7 @@ e.preventDefault()
         </div>
           <br />
       </form>
-
+                {modalVisible && <AddModal modalVisible={modalVisible} setModalVisible={setModalVisible} pkg={pkg} newPackage={newPackage} />}
     </div>
   );
 }

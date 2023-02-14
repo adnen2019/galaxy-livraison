@@ -234,7 +234,7 @@ function PackageList(props) {
                 <i onClick={()=>{setPkg(pkg)
                 setModalVisible(true)
                 }} className="feather icon-eye m-1"></i>
-                <i className="feather icon-edit m-1"></i>
+                {/* <i className="feather icon-edit m-1"></i> */}
                 <span role="button" ><i  onClick={()=>deletePackage(pkg)} className="feather icon-trash-2 m-1"></i></span>
               </div>
             );
