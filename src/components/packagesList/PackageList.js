@@ -7,6 +7,8 @@ import { connect } from "react-redux";
 import { DeletePackage } from "../../services/package/DeletePackage";
 import { ExclamationCircleOutlined } from "@ant-design/icons";
 import BillModal from "../bill/BillModal";
+import { PDFViewer } from "@react-pdf/renderer";
+import PackagesList from "../pdf/PackagesList";
 const { Column } = Table;
 const { Option } = Select;
 
@@ -42,12 +44,13 @@ function PackageList(props) {
       selectedRowKeys.includes(pkg.serieColis)
     );
     list = list.map((pkg) => ({
-      nomDistinateur:pkg.nomDistinateur,
-      telDistinatair:pkg.telDistinatair,
-      vilDistinateur:pkg.vilDistinateur,
-      adressDistinatair:pkg.adressDistinatair,
-      prisColis:pkg.prisColis,
-      dicriptionColis:pkg.dicriptionColis,
+      "Nom & prénom":pkg.nomDistinateur,
+      "Numéro de téléphone":pkg.telDistinatair,
+      "Ville":pkg.vilDistinateur,
+      "Adresse":pkg.adressDistinatair,
+      "COD":pkg.prisColis,
+      "Libelle de marchandise ":pkg.dicriptionColis,
+      "Délégation":"",
     }));
     JsonToCsv(list);
   };
@@ -247,7 +250,12 @@ function PackageList(props) {
         </button>
       </div>
       {modalVisible&&<BillModal pkg={pkg} modalVisible={modalVisible} setModalVisible={setModalVisible} />}
-
+      {/* <PDFViewer
+ style={{height:"27rem"}}
+  className='w-100'
+   >
+ <PackagesList user={props.user.user} pkg={pkg} />
+  </PDFViewer> */}
     </>
   );
 }

@@ -20,7 +20,7 @@ export const SheetToJson = async (file, cb) => {
       nomDistinateur:pkg["Nom & prénom"],
       telDistinatair:pkg["Numéro de téléphone"],
       vilDistinateur:pkg["Ville"],
-      adressDistinatair:pkg["Nom & prénom"],
+      adressDistinatair:pkg["Adresse"],
       prisColis:pkg["COD"],
       dicriptionColis:pkg["Libelle de marchandise "],
     }));
