@@ -165,6 +165,7 @@ function PackageList(props) {
           <Option value="Tout">Tout</Option>
           <Option value="Collect">Collect</Option>
           <Option value="EnCourdeVerification">En Cours de Verification</Option>
+          <Option value="Livraison">En Livraison</Option>
           <Option value="Echange">Echange</Option>
           <Option value="Livrer">Livrer</Option>
           <Option value="Depot">Depot</Option>
