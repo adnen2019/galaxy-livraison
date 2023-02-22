@@ -157,7 +157,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onToggleNavigation: () => dispatch({type: actionTypes.COLLAPSE_MENU}),
+        onToggleNavigation: () => {dispatch({type: actionTypes.COLLAPSE_MENU});return false;},
         onChangeLayout: (layout) => dispatch({type: actionTypes.CHANGE_LAYOUT, layout: layout}),
     }
 };

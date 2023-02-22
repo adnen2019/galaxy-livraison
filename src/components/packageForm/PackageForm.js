@@ -140,7 +140,7 @@ e.preventDefault()
     const user=props.user.user
     const {nomExpiditeur,
       telExpiditeur,
-      vilExpiditeur,
+      agenceExpiditeur,
        prixLivrer,
        prixRetour,
       prixExtra,
@@ -153,7 +153,7 @@ e.preventDefault()
       //varaible user
       nomExpiditeur: nomExpiditeur,
       numeroExpiditeur: telExpiditeur,
-      villExpiditeur: vilExpiditeur,
+      villExpiditeur: agenceExpiditeur,
       fraiLivraison: prixLivrer,
       fraiRetour: prixRetour,
       fraiLivExtra: prixExtra,
@@ -161,7 +161,7 @@ e.preventDefault()
       //
       prisColis:packageData.prisColis=="0"?"0":Number(packageData.prisColis)+Number(prixLivrer),
       detailColi:poids+" kg // "+nombre+" Pieces",
-      dicriptionColis:packageData.dicriptionColis+(packageData.naturColis=="Gros Colis"&&"/h:"+hauteur+"/Log:"+longeur+"/Lar:"+largeur),
+      dicriptionColis:packageData.dicriptionColis+(packageData.naturColis=="Gros Colis"?"/h:"+hauteur+"/Log:"+longeur+"/Lar:"+largeur:""),
       journalColis:"Creation par: "+nomExpiditeur+" le "+moment().format("DD/MM/yyyy|HH:mm")
     };
     AddPackage(data,()=>{
@@ -182,10 +182,10 @@ e.preventDefault()
   };
  
   const handleChange = (e) => {
-    console.log(e.target.value);
+    // console.log(e.target.value);
   };
   const handleSelect = (e) => {
-    console.log(e);
+    // console.log(e);
   };
   const children = [];
   const locationsList = ["Ariana",

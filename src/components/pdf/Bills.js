@@ -72,35 +72,39 @@ const styles = StyleSheet.create({
     width: "100%",
   },
 });
-function Bill(props) {
+function Bills(props) {
   // console.log(props)
-  const {
-    nomDistinateur,
-    telDistinatair,
-    adressDistinatair,
-    dicriptionColis,
-    vilDistinateur,
-    prisColis,
-    serieColis,
-    datAjoutColis,
-    nomExpiditeur,
-    numeroExpiditeur,
-    villExpiditeur,
-    detailColi,
-  } = props.pkg;
+ 
   
-  const qrCodeComponent = <QRCode value={serieColis} />;
 
-  const qrCodeComponentStaticMarkup = renderToStaticMarkup(qrCodeComponent);
-
-  const parsedQrCodeSvg = parseQrCodeMarkup(qrCodeComponentStaticMarkup);
-  if (!parsedQrCodeSvg) {
-    return null;
-  }
   return (
     <>
       <Document>
-        <Page size="A4" style={styles.page}>
+       {props.packages.map((pkg)=>{
+         const {
+            nomDistinateur,
+            telDistinatair,
+            adressDistinatair,
+            dicriptionColis,
+            vilDistinateur,
+            prisColis,
+            serieColis,
+            datAjoutColis,
+            nomExpiditeur,
+            numeroExpiditeur,
+            villExpiditeur,
+            detailColi,
+          } = pkg;
+          const qrCodeComponent = <QRCode value={serieColis} />;
+
+          const qrCodeComponentStaticMarkup = renderToStaticMarkup(qrCodeComponent);
+        
+          const parsedQrCodeSvg = parseQrCodeMarkup(qrCodeComponentStaticMarkup);
+          if (!parsedQrCodeSvg) {
+            return null;
+          }
+        return(
+<Page size="A4" style={styles.page}>
           <View style={styles.container}>
             <View style={styles.column}>
               <Text>Pickup: {datAjoutColis}</Text>
@@ -198,6 +202,8 @@ function Bill(props) {
 
           </View>
         </Page>
+        )
+       }) }
       </Document>
     </>
   );
@@ -218,4 +224,4 @@ const parseQrCodeMarkup = (markup) => {
 //     user: state.user,
 //   };
 // };
-export default (Bill);
+export default (Bills);

@@ -2,11 +2,11 @@ import { equalTo, onValue, orderByChild, query, ref} from "firebase/database";
 // import { collection, getDocs, query, where } from "firebase/firestore";
 import { db } from "../../firebase-config";
 
-export  const GetPackages=async(id,cb,setLoading) => {
+export  const GetBills=async(id,cb,setLoading) => {
     try {
       setLoading(true)
-      const request =query(ref(db, 'ListPickup')
-      , orderByChild('idExpiditeur')
+      const request =query(ref(db, 'Factur')
+      , orderByChild('idExpiditeuFactur')
       ,equalTo(id),
       );
          onValue(request, (snapshot) => {
@@ -25,5 +25,6 @@ export  const GetPackages=async(id,cb,setLoading) => {
         
       } catch (err) {
         // console.log(err.message);
+
       }
 }

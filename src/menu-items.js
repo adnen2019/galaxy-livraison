@@ -33,7 +33,14 @@ export default {
                     type: 'item',
                     url: '/sender/packages',
                     icon: 'feather icon-list',
-                }
+                },
+                // {
+                //     id: 'billsList',
+                //     title: 'Liste des factures',
+                //     type: 'item',
+                //     url: '/sender/bills',
+                //     icon: 'feather icon-file-text',
+                // }
             ]
         },
         

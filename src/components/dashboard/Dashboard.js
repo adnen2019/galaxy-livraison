@@ -45,11 +45,11 @@ export default function Dashboard(props) {
   let packages = props.packages;
   if (gov == "Tout") {
   } else {
-    packages = packages.filter((pkg) => pkg.agenceLivraison == gov);
+    packages = packages.filter((pkg) => pkg.vilDistinateur == gov);
   }
   let x1 = packages.filter((pkg) => pkg.etatLivraison == "Collect").length;
   let x2 = packages.filter(
-    (pkg) => pkg.etatLivraison == "En Cours de Verification"
+    (pkg) => pkg.etatLivraison == "Livraison"
   ).length;
   let x3 = packages.filter((pkg) => pkg.etatLivraison == "Echange").length;
   let x4 = packages.filter((pkg) => pkg.etatLivraison == "Livrer").length;
@@ -81,7 +81,7 @@ export default function Dashboard(props) {
         <DoughnutChart
           labels={[
             "Collect",
-            // "En Cours de Verification",
+             "Livraison",
             "Echange",
             "Livrer",
             "Depot",
@@ -89,15 +89,15 @@ export default function Dashboard(props) {
             "Retour",
           ]}
           colors={[
-            "rgb(96, 96, 96)",
-            // "rgb(5, 19, 103)",
+            "rgb(160, 160, 160)",
+            "rgb(51, 51, 255)",
             "rgb(51, 255, 51)",
             "rgb(51, 255, 51)",
             "rgb(255, 153, 51)",
             "rgb(255, 51, 51)",
             "rgb(255, 255, 51)",
           ]}
-          data={[x1, x3, x4, x5, x6, x7]}
+          data={[x1,x2, x3, x4, x5, x6, x7]}
           title={""}
         />
       </div>

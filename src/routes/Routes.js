@@ -140,6 +140,10 @@ export default class Routes extends Component {
                 <SenderRouter role={this.user.current.role} exact path="/sender/packages">
                   <PackageList loading={this.state.load} packages={this.state.packages} userId={this.user.current.idExpiditeur} />
                 </SenderRouter>
+                <SenderRouter role={this.user.current.role} exact path="/sender/bills">
+                  <PackageList loading={this.state.load} packages={this.state.packages} userId={this.user.current.idExpiditeur} />
+                </SenderRouter>
+                
                 <SenderAdminRouter isAdmin={this.user.current.expixiteur1=="admin"} role={this.user.current.role} exact path="/sender/admin">
                   <PackageList loading={this.state.load3} packages={this.state.allPackages} userId={this.user.current.idExpiditeur} />
                 </SenderAdminRouter>

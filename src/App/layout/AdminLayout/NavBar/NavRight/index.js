@@ -17,7 +17,6 @@ class NavRight extends Component {
     };
 
     render() {
-console.log(this.props);
         return (
             <Aux>
                 <ul className="navbar-nav ml-auto">

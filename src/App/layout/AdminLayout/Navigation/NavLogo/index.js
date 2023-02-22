@@ -20,7 +20,9 @@ const navLogo = (props) => {
       <img height={"90"} src={logo} />
 
                  </a>
-                <a href={DEMO.BLANK_LINK} className={toggleClass.join(' ')} id="mobile-collapse" onClick={props.onToggleNavigation}><span /></a>
+                <a href="" className={toggleClass.join(' ')} id="mobile-collapse" onClick={(e)=>{
+                    e.preventDefault()
+                    props.onToggleNavigation()}}><span /></a>
             </div>
         </Aux>
     );

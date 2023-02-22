@@ -15,7 +15,7 @@ export const SheetToJson = async (file, cb) => {
     /* Convert array of arrays */
     const data = utils.sheet_to_json(ws, { header: 0 });
     /* Update state */
-    console.log(data);
+    // console.log(data);
     const normalizedData = data.map((pkg) => ({
       nomDistinateur:pkg["Nom & prénom"],
       telDistinatair:pkg["Numéro de téléphone"],

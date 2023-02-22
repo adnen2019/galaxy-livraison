@@ -13,7 +13,7 @@ export  const GetFinishedPackages=async(id,cb,setLoading) => {
           const data = snapshot.val();
           if (snapshot.exists()) {
            let packages= Object.values(data)
-           console.log(packages);
+          //  console.log("finished:",packages);
            cb(packages.reverse())
            setLoading(false)
           //  let states=packages.map(p=>p.etatLivraison)
@@ -21,9 +21,14 @@ export  const GetFinishedPackages=async(id,cb,setLoading) => {
           //  console.log(states);
      
           }
+          else{
+            // console.log("finished empty");
+           setLoading(false)
+          }
         });
         
       } catch (err) {
-        alert(err.message);
+        // console.log(err.message);
+
       }
 }

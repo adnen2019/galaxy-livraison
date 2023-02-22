@@ -15,7 +15,7 @@ const initialState = {
 const appReducer = (state = initialState, action) => {
     let trigger = [];
     let open = [];
-    console.log(action);
+    // console.log(action);
     switch (action.type) {
         // case actionTypes.SET_USER:
         //     return {

@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { GetPackages } from "../../services/package/GetPackages";
-import { Input, Modal, Select, Table } from "antd";
+import { Button, Input, Modal, Select, Table } from "antd";
 import { useHistory, withRouter } from "react-router-dom";
 import { JsonToCsv } from "../../utils/JsonToCsv";
 import { connect } from "react-redux";
 import { DeletePackage } from "../../services/package/DeletePackage";
 import { ExclamationCircleOutlined } from "@ant-design/icons";
 import BillModal from "../bill/BillModal";
-import { PDFViewer } from "@react-pdf/renderer";
+import { PDFDownloadLink, PDFViewer } from "@react-pdf/renderer";
 import PackagesList from "../pdf/PackagesList";
+import Bills from "../pdf/Bills";
 const { Column } = Table;
 const { Option } = Select;
 
@@ -20,6 +21,7 @@ function PackageList(props) {
   const [selectedRowKeys, setSelectedRowKeys] = useState([]);
   const [modalVisible,setModalVisible]=useState(false)
   const [pkg,setPkg]=useState({})
+  const [download,setDownload]=useState([])
 
   const deletePackage=(pkg)=>{
     if(pkg.etatLivraison=="Collect"){
@@ -39,7 +41,8 @@ function PackageList(props) {
     });}
   }
   const exportAsFile = () => {
-    console.log(selectedRowKeys);
+    // console.log(selectedRowKeys);
+    
     let list = props.packages.filter((pkg) =>
       selectedRowKeys.includes(pkg.serieColis)
     );
@@ -50,12 +53,15 @@ function PackageList(props) {
       "Adresse":pkg.adressDistinatair,
       "COD":pkg.prisColis,
       "Libelle de marchandise ":pkg.dicriptionColis,
-      "Délégation":"",
+      "Délégation":pkg.vilDistinateur,
     }));
     JsonToCsv(list);
   };
+  const setDownloadAsync=(value)=>{
+    setTimeout(()=>{setDownload(value)},100)
+  }
   const onSelect = (record, selected, selectedRows, nativeEvent) => {
-    console.log({ record }, { selected }, { selectedRows }, { nativeEvent });
+    // console.log({ record }, { selected }, { selectedRows }, { nativeEvent });
     let selectedQuestionsKeys = [...selectedRowKeys];
     if (selected) {
       selectedQuestionsKeys.push(record.serieColis);
@@ -70,12 +76,20 @@ function PackageList(props) {
     // this.setState(prev => ({ selectedRowKeys:selectedQuestionsKeys }))
     // this.setState({ selectedRowKeys:selectedQuestionsKeys });
     setSelectedRowKeys(selectedQuestionsKeys);
+    
+    setDownloadAsync(props.packages.filter((pkg) =>
+    selectedQuestionsKeys.includes(pkg.serieColis)
+  ))
   };
   const onSelectAll = (selected, selectedRows, changeRows) => {
     if (selected) {
       setSelectedRowKeys(filteredPackages.map((p) => p.serieColis));
+      setDownloadAsync(filteredPackages)
+
     } else {
       setSelectedRowKeys([]);
+      setDownloadAsync([])
+
     }
   };
   const history = useHistory({});
@@ -209,12 +223,12 @@ function PackageList(props) {
 
         <Column
           align="center"
-          sorter={(a, b) => a.detailColi.localeCompare(b.detailColi)}
+          sorter={(a, b) => a.dicriptionColis.localeCompare(b.dicriptionColis)}
           responsive={["md"]}
           // responsive={['lg']}
           title="Détail"
-          dataIndex="detailColi"
-          key="detailColi"
+          dataIndex="dicriptionColis"
+          key="dicriptionColis"
         />
 
         <Column
@@ -248,14 +262,21 @@ function PackageList(props) {
         <button onClick={exportAsFile} className="btn btn-primary rounded">
           Exporter
         </button>
+        {/* <PDFDownloadLink document={<Bills user={props.user.user} packages={props.packages.filter((pkg) =>
+      selectedRowKeys.includes(pkg.serieColis)
+    )} />} > */}
+          {/* </PDFDownloadLink> */}
+         <PDFDownloadLink document={<Bills user={props.user.user} packages={download} />} fileName="document.pdf">
+          <button  className='btn btn-primary rounded' >Imprimer</button>
+    </PDFDownloadLink>
+    <PDFDownloadLink document={ <PackagesList user={props.user.user} packages={download} />} fileName="document.pdf">
+          <button  className='btn btn-primary rounded' >Décharge</button>
+    </PDFDownloadLink>
+    
       </div>
       {modalVisible&&<BillModal pkg={pkg} modalVisible={modalVisible} setModalVisible={setModalVisible} />}
-      {/* <PDFViewer
- style={{height:"27rem"}}
-  className='w-100'
-   >
- <PackagesList user={props.user.user} pkg={pkg} />
-  </PDFViewer> */}
+      
+  
     </>
   );
 }

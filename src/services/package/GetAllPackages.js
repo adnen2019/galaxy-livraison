@@ -11,7 +11,7 @@ export  const GetAllPackages=async(cb,setLoading) => {
           const data = snapshot.val();
           if (snapshot.exists()) {
            let packages= Object.values(data)
-           console.log(packages);
+          //  console.log(packages);
            cb(packages.reverse())
            setLoading(false)
           //  let states=packages.map(p=>p.etatLivraison)
@@ -22,6 +22,7 @@ export  const GetAllPackages=async(cb,setLoading) => {
         });
         
       } catch (err) {
-        alert(err.message);
+        // console.log(err.message);
+
       }
 }
