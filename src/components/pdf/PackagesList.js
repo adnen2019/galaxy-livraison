@@ -7,6 +7,7 @@ const styles = StyleSheet.create({
   container:{
     margin:5,
     marginTop:25,
+    marginHorizontal:15,
     fontSize:"12px",
     // alignItems:"center",
     flexWrap:"wrap"

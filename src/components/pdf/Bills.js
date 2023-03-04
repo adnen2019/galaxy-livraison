@@ -23,7 +23,8 @@ const styles = StyleSheet.create({
   page: {
     backgroundColor: "#E4E4E4",
     flexDirection: "column",
-
+    paddingHorizontal:10,
+    paddingTop:10,
     // flex:1,
     // border: 3,
   },

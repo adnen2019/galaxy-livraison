@@ -46,15 +46,15 @@ function PackageList(props) {
     let list = props.packages.filter((pkg) =>
       selectedRowKeys.includes(pkg.serieColis)
     );
-    list = list.map((pkg) => ({
-      "Nom & prénom":pkg.nomDistinateur,
-      "Numéro de téléphone":pkg.telDistinatair,
-      "Ville":pkg.vilDistinateur,
-      "Adresse":pkg.adressDistinatair,
-      "COD":pkg.prisColis,
-      "Libelle de marchandise ":pkg.dicriptionColis,
-      "Délégation":pkg.vilDistinateur,
-    }));
+    // list = list.map((pkg) => ({
+    //   "Nom & prénom":pkg.nomDistinateur,
+    //   "Numéro de téléphone":pkg.telDistinatair,
+    //   "Ville":pkg.vilDistinateur,
+    //   "Adresse":pkg.adressDistinatair,
+    //   "COD":pkg.prisColis,
+    //   "Libelle de marchandise ":pkg.dicriptionColis,
+    //   "Délégation":pkg.vilDistinateur,
+    // }));
     JsonToCsv(list);
   };
   const setDownloadAsync=(value)=>{

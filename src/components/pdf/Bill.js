@@ -31,6 +31,8 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     border: 2,
     display: "flex",
+    marginHorizontal:10,
+    marginTop:10,
 
     justifyContent: "center",
   },
