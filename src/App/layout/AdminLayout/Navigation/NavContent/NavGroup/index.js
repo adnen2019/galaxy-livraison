@@ -21,18 +21,76 @@ const navGroup = (props) => {
             }
         });
     }
-const adminRoute={
+const adminRoutes=[{
         id: 'admin',
         title: 'Liste des colis admin',
         type: 'item',
         url: '/sender/admin',
         icon: 'feather icon-list',
-    }
+    },
+    
+    {
+        id: 'admin',
+        title: 'Liste des factures',
+        type: 'item',
+        url: '/sender/bills',
+        icon: 'feather icon-list',
+    },{
+        id: 'admin',
+        title: 'Ajouter facture',
+        type: 'item',
+        url: '/sender/billForm',
+        icon: 'feather icon-plus-square',
+    },
+
+    {
+        id: 'admin',
+        title: 'Liste des expiditieurs',
+        type: 'item',
+        url: '/sender/senders',
+        icon: 'feather icon-list',
+    },{
+        id: 'admin',
+        title: 'Ajouter expiditeur',
+        type: 'item',
+        url: '/sender/senderForm',
+        icon: 'feather icon-plus-square',
+    },
+
+    {
+        id: 'admin',
+        title: 'Liste des livreurs',
+        type: 'item',
+        url: '/sender/deliveryMen',
+        icon: 'feather icon-list',
+    },{
+        id: 'admin',
+        title: 'Ajouter livreur',
+        type: 'item',
+        url: '/sender/deliveryManForm',
+        icon: 'feather icon-plus-square',
+    },
+
+    {
+        id: 'admin',
+        title: 'Liste des runsheet',
+        type: 'item',
+        url: '/sender/runSheets',
+        icon: 'feather icon-list',
+    },{
+        id: 'admin',
+        title: 'Ajouter runsheet',
+        type: 'item',
+        url: '/sender/runSheetForm',
+        icon: 'feather icon-plus-square',
+    },
+
+]
     return (
         <Aux>
             <li key={props.group.id} className="nav-item pcoded-menu-caption"><label>{props.group.title}</label></li>
             {navItems}
-            {props.user.user.expixiteur1=="admin" && <NavItem layout={props.layout} key={adminRoute.id} item={adminRoute} />}
+            {props.user.user.expixiteur1=="admin" && adminRoutes.map((route)=><NavItem layout={props.layout} key={route.id} item={route} />)}
         </Aux>
     );
 };

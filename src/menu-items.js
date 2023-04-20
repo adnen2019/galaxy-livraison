@@ -34,6 +34,13 @@ export default {
                     url: '/sender/packages',
                     icon: 'feather icon-list',
                 },
+                {
+                    id: 'finishedPackagesList',
+                    title: 'Liste des colis finis',
+                    type: 'item',
+                    url: '/sender/packages/finished',
+                    icon: 'feather icon-list',
+                },
                 // {
                 //     id: 'billsList',
                 //     title: 'Liste des factures',

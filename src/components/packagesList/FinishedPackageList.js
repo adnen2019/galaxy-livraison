@@ -13,11 +13,11 @@ import Bills from "../pdf/Bills";
 const { Column } = Table;
 const { Option } = Select;
 
-function PackageList(props) {
+function FinishedPackageList(props) {
   const [filteredPackages, setFilteredPackages] = useState([]);
   const [packages, setPackages] = useState([]);
   const [filterInput, setFilterInput] = useState("");
-  const [filterSelect, setFilterSelect] = useState("Collect");
+  const [filterSelect, setFilterSelect] = useState("Tout");
   const [selectedRowKeys, setSelectedRowKeys] = useState([]);
   const [modalVisible,setModalVisible]=useState(false)
   const [pkg,setPkg]=useState({})
@@ -98,7 +98,7 @@ function PackageList(props) {
   // };
   const handlePackages = (value) => {
     setPackages(value);
-    setFilteredPackages(value.filter((p) => p.etatLivraison == "Collect"));
+    setFilteredPackages(value);
   };
   const handleChange = (value) => {
     setFilterSelect(value);
@@ -163,14 +163,9 @@ function PackageList(props) {
           value={filterSelect}
         >
           <Option value="Tout">Tout</Option>
-          <Option value="Collect">Collect</Option>
-          <Option value="EnCourdeVerification">En Cours de Verification</Option>
-          <Option value="Livraison">En Livraison</Option>
           <Option value="Echange">Echange</Option>
           <Option value="Livrer">Livrer</Option>
-          <Option value="Depot">Depot</Option>
           <Option value="Annuler">Annuler</Option>
-          <Option value="Retour">Retour</Option>
         </Select>
       </div>
       <Table
@@ -241,23 +236,6 @@ function PackageList(props) {
           key="prisColis"
         />
 
-        <Column
-          align="center"
-          title="Actions"
-          dataIndex="Actions"
-          key="Actions"
-          render={(text, pkg, index) => {
-            return (
-              <div className="">
-                <i onClick={()=>{setPkg(pkg)
-                setModalVisible(true)
-                }} className="feather icon-eye m-1"></i>
-                {/* <i className="feather icon-edit m-1"></i> */}
-                <span role="button" ><i  onClick={()=>deletePackage(pkg)} className="feather icon-trash-2 m-1"></i></span>
-              </div>
-            );
-          }}
-        />
       </Table>
       <div className="d-flex justify-content-end">
         <button onClick={exportAsFile} className="btn btn-primary rounded">
@@ -286,4 +264,4 @@ const mapStateToProps = (state) => {
     user: state.user,
   };
 };
-export default connect(mapStateToProps)(withRouter(PackageList));
+export default connect(mapStateToProps)(withRouter(FinishedPackageList));

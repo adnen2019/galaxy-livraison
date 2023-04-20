@@ -21,6 +21,18 @@ import { GetPackages } from "../services/package/GetPackages";
 import { GetFinishedPackages } from "../services/package/GetFinishedPackages";
 import SenderAdminRouter from "./router/SenderAdminRouter";
 import { GetAllPackages } from "../services/package/GetAllPackages";
+import BillForm from "../components/billForm/BillForm";
+import SenderForm from "../components/senderForm/SenderForm";
+import DeliveryMen from "../components/deliveryMen/DeliveryMen";
+import DeliveryManForm from "../components/deliveryManForm/DeliveryManForm";
+import RunSheets from "../components/runsheets/RunSheets";
+import RunSheetForm from "../components/runSheetForm/RunSheetForm";
+import { GetDeliveryMen } from "../services/deliveryMan/GetDeliveryMen";
+import { GetSenders } from "../services/sender/GetSenders";
+import { GetRunSheets } from "../services/runSheet/GetRunSheets";
+import Senders from "../components/senders/Senders";
+import { GetBills } from "../services/bill/GetBills";
+import FinishedPackageList from "../components/packagesList/FinishedPackageList";
 
 export default class Routes extends Component {
   constructor() {
@@ -41,9 +53,21 @@ export default class Routes extends Component {
       load:true,
       load2:true,
       load3:true,
+
+      sendersLoad:true,
+      deliveryMenLoad:true,
+      billsLoad:true,
+      runSheetsLoad:true,
+
       allPackages:[],
       packages:[],
       finishedPackages:[],
+
+      senders:[],
+      deliveryMen:[],
+      bills:[],
+      runSheets:[],
+
     };
   
   }
@@ -57,12 +81,41 @@ export default class Routes extends Component {
   getFinishedPackages = async (id) => {
     await GetFinishedPackages(id, this.setFinishedPackages, this.setLoad2);
   };
+
+  getSenders = async (id) => {
+    await GetSenders(id, this.setSenders, this.setSendersLoad);
+  };
+  getDeliveryMen = async (id) => {
+    await GetDeliveryMen(id, this.setDeliveryMen, this.setDeliveryMenLoad);
+  };
+  getBills = async (id) => {
+    await GetBills(id, this.setBills, this.setBillsLoad);
+  };
+  getRunSheets = async (id) => {
+    await GetRunSheets(id, this.setRunSheets, this.setRunSheetsLoad);
+  };
+
   setLoad=(load)=>{this.setState({load})}
   setLoad2=(load2)=>{this.setState({load2})}
   setLoad3=(load3)=>{this.setState({load3})}
+
+  setSendersLoad=(sendersLoad)=>{this.setState({sendersLoad})}
+  setDeliveryMenLoad=(deliveryMenLoad)=>{this.setState({deliveryMenLoad})}
+  setBills=(bills)=>{this.setState({bills})}
+  setRunSheets=(runSheets)=>{this.setState({runSheets})}
+
+
   setAllPackages=(allPackages)=>{this.setState({allPackages})}
   setPackages=(packages)=>{this.setState({packages})}
   setFinishedPackages=(finishedPackages)=>{this.setState({finishedPackages})}
+
+  setSenders=(senders)=>{this.setState({senders})}
+  setDeliveryMen=(deliveryMen)=>{this.setState({deliveryMen})}
+  setBills=(bills)=>{this.setState({bills})}
+  setRunSheets=(runSheets)=>{this.setState({runSheets})}
+
+  
+  
   setUser=(user)=>{this.user.current=user}
   
 
@@ -140,6 +193,9 @@ export default class Routes extends Component {
                 <SenderRouter role={this.user.current.role} exact path="/sender/packages">
                   <PackageList loading={this.state.load} packages={this.state.packages} userId={this.user.current.idExpiditeur} />
                 </SenderRouter>
+                <SenderRouter role={this.user.current.role} exact path="/sender/packages/finished">
+                  <FinishedPackageList loading={this.state.load2} packages={this.state.finishedPackages} userId={this.user.current.idExpiditeur} />
+                </SenderRouter>
                 <SenderRouter role={this.user.current.role} exact path="/sender/bills">
                   <PackageList loading={this.state.load} packages={this.state.packages} userId={this.user.current.idExpiditeur} />
                 </SenderRouter>
@@ -147,6 +203,45 @@ export default class Routes extends Component {
                 <SenderAdminRouter isAdmin={this.user.current.expixiteur1=="admin"} role={this.user.current.role} exact path="/sender/admin">
                   <PackageList loading={this.state.load3} packages={this.state.allPackages} userId={this.user.current.idExpiditeur} />
                 </SenderAdminRouter>
+
+                <SenderAdminRouter isAdmin={this.user.current.expixiteur1=="admin"} role={this.user.current.role} exact path="/sender/bills">
+                  <PackageList loading={this.state.load3} packages={this.state.allPackages} userId={this.user.current.idExpiditeur} />
+                </SenderAdminRouter>
+                <SenderAdminRouter isAdmin={this.user.current.expixiteur1=="admin"} role={this.user.current.role} exact path="/sender/billForm">
+                  <BillForm/>
+                  {/* <PackageList loading={this.state.load3} packages={this.state.allPackages} userId={this.user.current.idExpiditeur} /> */}
+                </SenderAdminRouter>
+
+                <SenderAdminRouter isAdmin={this.user.current.expixiteur1=="admin"} role={this.user.current.role} exact path="/sender/senders">
+                  <Senders sendersLoad={this.state.sendersLoad}
+senders={this.state.senders} />
+                  {/* <PackageList loading={this.state.load3} packages={this.state.allPackages} userId={this.user.current.idExpiditeur} /> */}
+                </SenderAdminRouter>
+                <SenderAdminRouter isAdmin={this.user.current.expixiteur1=="admin"} role={this.user.current.role} exact path="/sender/senderForm">
+                  <SenderForm/>
+                  {/* <PackageList loading={this.state.load3} packages={this.state.allPackages} userId={this.user.current.idExpiditeur} /> */}
+                </SenderAdminRouter>
+
+                <SenderAdminRouter isAdmin={this.user.current.expixiteur1=="admin"} role={this.user.current.role} exact path="/sender/deliveryMen">
+                  <DeliveryMen/>
+                  {/* <PackageList loading={this.state.load3} packages={this.state.allPackages} userId={this.user.current.idExpiditeur} /> */}
+                </SenderAdminRouter>
+                <SenderAdminRouter isAdmin={this.user.current.expixiteur1=="admin"} role={this.user.current.role} exact path="/sender/deliveryManForm">
+                  <DeliveryManForm/>
+                  {/* <PackageList loading={this.state.load3} packages={this.state.allPackages} userId={this.user.current.idExpiditeur} /> */}
+                </SenderAdminRouter>
+
+                <SenderAdminRouter isAdmin={this.user.current.expixiteur1=="admin"} role={this.user.current.role} exact path="/sender/runSheets">
+                  <RunSheets/>
+                  {/* <PackageList loading={this.state.load3} packages={this.state.allPackages} userId={this.user.current.idExpiditeur} /> */}
+                </SenderAdminRouter>
+                <SenderAdminRouter isAdmin={this.user.current.expixiteur1=="admin"} role={this.user.current.role} exact path="/sender/runSheetForm">
+                  <RunSheetForm/>
+                  {/* <PackageList loading={this.state.load3} packages={this.state.allPackages} userId={this.user.current.idExpiditeur} /> */}
+                </SenderAdminRouter>
+       
+
+
                 {/* <Route  component={NotFoundView} /> */}
           </Switch>
           {/* </Navbar> */}

@@ -43,9 +43,12 @@ export default function Dashboard(props) {
     );
   }
   let packages = props.packages;
+  let finishedPackages = props.finishedPackages;
+  
   if (gov == "Tout") {
   } else {
     packages = packages.filter((pkg) => pkg.vilDistinateur == gov);
+    finishedPackages = finishedPackages.filter((pkg) => pkg.vilDistinateur == gov);
   }
   let x1 = packages.filter((pkg) => pkg.etatLivraison == "Collect").length;
   let x2 = packages.filter(
@@ -56,6 +59,11 @@ export default function Dashboard(props) {
   let x5 = packages.filter((pkg) => pkg.etatLivraison == "Depot").length;
   let x6 = packages.filter((pkg) => pkg.etatLivraison == "Annuler").length;
   let x7 = packages.filter((pkg) => pkg.etatLivraison == "Retour").length;
+
+  let y1 = finishedPackages.filter((pkg) => pkg.etatLivraison == "Echange").length;
+  let y2 = finishedPackages.filter((pkg) => pkg.etatLivraison == "Livrer").length;
+  let y3 = finishedPackages.filter((pkg) => pkg.etatLivraison == "Annuler").length;
+
   return (
     <div>
       <div className=" col-lg-6 col-md-12 ">
@@ -76,7 +84,8 @@ export default function Dashboard(props) {
         </Select>
         <br />
       </div>
-      <div className="text-center m-0 fw-bold text-secondary col-md-12 col-lg-6">
+      <div className="row" >
+      <div className="text-center  fw-bold text-secondary col-md-12 col-lg-6">
         Statistiques des colis
         <DoughnutChart
           labels={[
@@ -100,6 +109,24 @@ export default function Dashboard(props) {
           data={[x1,x2, x3, x4, x5, x6, x7]}
           title={""}
         />
+      </div>
+      <div className="text-center  fw-bold text-secondary col-md-12 col-lg-6">
+        Statistiques des colis finis
+        <DoughnutChart
+          labels={[
+            "Echange",
+            "Livrer",
+            "Annuler",
+          ]}
+          colors={[
+            "rgb(51, 160, 51)",
+            "rgb(51, 255, 51)",
+            "rgb(255, 51, 51)",
+          ]}
+          data={[y1,y2, y3,]}
+          title={""}
+        />
+      </div>
       </div>
     </div>
   );
