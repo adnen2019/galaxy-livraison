@@ -45,7 +45,13 @@ export default class Routes extends Component {
       this.user.current={role:'sender',...user}
       this.getPackages(user.idExpiditeur)
       if(user?.expixiteur1=="admin"){
-      this.getAllPackages()}
+      this.getAllPackages()
+      // this.getBills()
+      // this.getSenders()
+      // this.getDeliveryMen()
+      // this.getRunSheets()
+    
+    }
     }
 
     // this.jwtVerify();
@@ -214,7 +220,8 @@ export default class Routes extends Component {
 
                 <SenderAdminRouter isAdmin={this.user.current.expixiteur1=="admin"} role={this.user.current.role} exact path="/sender/senders">
                   <Senders sendersLoad={this.state.sendersLoad}
-senders={this.state.senders} />
+senders={this.state.senders} getSenders={this.getSenders} />
+
                   {/* <PackageList loading={this.state.load3} packages={this.state.allPackages} userId={this.user.current.idExpiditeur} /> */}
                 </SenderAdminRouter>
                 <SenderAdminRouter isAdmin={this.user.current.expixiteur1=="admin"} role={this.user.current.role} exact path="/sender/senderForm">
@@ -223,7 +230,8 @@ senders={this.state.senders} />
                 </SenderAdminRouter>
 
                 <SenderAdminRouter isAdmin={this.user.current.expixiteur1=="admin"} role={this.user.current.role} exact path="/sender/deliveryMen">
-                  <DeliveryMen/>
+                  <DeliveryMen  deliveryMenLoad={this.state.deliveryMenLoad}
+deliveryMen={this.state.deliveryMen} getDeliveryMen={this.getDeliveryMen}  />
                   {/* <PackageList loading={this.state.load3} packages={this.state.allPackages} userId={this.user.current.idExpiditeur} /> */}
                 </SenderAdminRouter>
                 <SenderAdminRouter isAdmin={this.user.current.expixiteur1=="admin"} role={this.user.current.role} exact path="/sender/deliveryManForm">
@@ -232,7 +240,10 @@ senders={this.state.senders} />
                 </SenderAdminRouter>
 
                 <SenderAdminRouter isAdmin={this.user.current.expixiteur1=="admin"} role={this.user.current.role} exact path="/sender/runSheets">
-                  <RunSheets/>
+                  <RunSheets
+                   runSheetsLoad={this.state.runSheetsLoad}
+                   runSheets={this.state.runSheets} getRunSheets={this.getRunSheets}
+                  />
                   {/* <PackageList loading={this.state.load3} packages={this.state.allPackages} userId={this.user.current.idExpiditeur} /> */}
                 </SenderAdminRouter>
                 <SenderAdminRouter isAdmin={this.user.current.expixiteur1=="admin"} role={this.user.current.role} exact path="/sender/runSheetForm">

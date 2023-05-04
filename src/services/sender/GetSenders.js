@@ -2,7 +2,7 @@ import { equalTo, onValue, orderByChild, query, ref} from "firebase/database";
 // import { collection, getDocs, query, where } from "firebase/firestore";
 import { db } from "../../firebase-config";
 
-export  const GetSenders=async(cb,setLoading) => {
+export  const GetSenders=async(id,cb,setLoading) => {
     try {
       setLoading(true)
       const request =query(ref(db, 'ListExpiditeur')
