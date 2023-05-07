@@ -23,6 +23,7 @@ export  const GetDeliveryMen=async(id,cb,setLoading) => {
         
       } catch (err) {
         // console.log(err.message);
+        setLoading(false)
 
       }
 }

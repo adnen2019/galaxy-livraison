@@ -24,6 +24,7 @@ export  const GetPackages=async(id,cb,setLoading) => {
         });
         
       } catch (err) {
+        setLoading(false)
         // console.log(err.message);
       }
 }

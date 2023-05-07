@@ -75,7 +75,7 @@ const styles = StyleSheet.create({
   },
 });
 function Bill(props) {
-  // console.log(props)
+  console.log(props)
   const {
     nomDistinateur,
     telDistinatair,

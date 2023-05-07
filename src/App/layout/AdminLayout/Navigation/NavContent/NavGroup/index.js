@@ -25,21 +25,21 @@ const adminRoutes=[{
         id: 'admin',
         title: 'Liste des colis admin',
         type: 'item',
-        url: '/sender/admin',
+        url: '/admin/packages',
         icon: 'feather icon-list',
     },
     
     {
         id: 'admin',
-        title: 'Liste des factures',
+        title: 'Liste des factures admin',
         type: 'item',
-        url: '/sender/bills',
+        url: '/admin/bills',
         icon: 'feather icon-list',
     },{
         id: 'admin',
         title: 'Ajouter facture',
         type: 'item',
-        url: '/sender/billForm',
+        url: '/admin/billForm',
         icon: 'feather icon-plus-square',
     },
 
@@ -47,13 +47,13 @@ const adminRoutes=[{
         id: 'admin',
         title: 'Liste des expiditieurs',
         type: 'item',
-        url: '/sender/senders',
+        url: '/admin/senders',
         icon: 'feather icon-list',
     },{
         id: 'admin',
         title: 'Ajouter expiditeur',
         type: 'item',
-        url: '/sender/senderForm',
+        url: '/admin/senderForm',
         icon: 'feather icon-plus-square',
     },
 
@@ -61,13 +61,13 @@ const adminRoutes=[{
         id: 'admin',
         title: 'Liste des livreurs',
         type: 'item',
-        url: '/sender/deliveryMen',
+        url: '/admin/deliveryMen',
         icon: 'feather icon-list',
     },{
         id: 'admin',
         title: 'Ajouter livreur',
         type: 'item',
-        url: '/sender/deliveryManForm',
+        url: '/admin/deliveryManForm',
         icon: 'feather icon-plus-square',
     },
 
@@ -75,13 +75,13 @@ const adminRoutes=[{
         id: 'admin',
         title: 'Liste des runsheet',
         type: 'item',
-        url: '/sender/runSheets',
+        url: '/admin/runSheets',
         icon: 'feather icon-list',
     },{
         id: 'admin',
         title: 'Ajouter runsheet',
         type: 'item',
-        url: '/sender/runSheetForm',
+        url: '/admin/runSheetForm',
         icon: 'feather icon-plus-square',
     },
 

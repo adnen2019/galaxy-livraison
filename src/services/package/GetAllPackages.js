@@ -23,6 +23,7 @@ export  const GetAllPackages=async(cb,setLoading) => {
         
       } catch (err) {
         // console.log(err.message);
+        setLoading(false)
 
       }
 }

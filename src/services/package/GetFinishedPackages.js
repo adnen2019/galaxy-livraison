@@ -29,6 +29,7 @@ export  const GetFinishedPackages=async(id,cb,setLoading) => {
         
       } catch (err) {
         // console.log(err.message);
+        setLoading(false)
 
       }
 }

@@ -41,13 +41,13 @@ export default {
                     url: '/sender/packages/finished',
                     icon: 'feather icon-list',
                 },
-                // {
-                //     id: 'billsList',
-                //     title: 'Liste des factures',
-                //     type: 'item',
-                //     url: '/sender/bills',
-                //     icon: 'feather icon-file-text',
-                // }
+                {
+                    id: 'billsList',
+                    title: 'Liste des factures',
+                    type: 'item',
+                    url: '/sender/bills',
+                    icon: 'feather icon-file-text',
+                }
             ]
         },
         

@@ -22,7 +22,7 @@ perfect-scrollbar.scroll-widget > .ps,
 perfect-scrollbar.main-chat-cont > .ps,
 perfect-scrollbar.config-scroll > .ps,
 perfect-scrollbar.main-friend-list > .ps {
-  &.ps--active-y > .ps__rail-y {
+   .ps__rail-y {
     width: 5px;
     &:hover, &.ps--clicking {
       width: 5px;
@@ -32,7 +32,7 @@ perfect-scrollbar.main-friend-list > .ps {
     opacity: 0.4;
     background-color: transparent;
   }
-  &.ps--active-y > .ps__rail-y {
+  .ps__rail-y {
     &:hover, &.ps--clicking {
       width: 5px;
     }

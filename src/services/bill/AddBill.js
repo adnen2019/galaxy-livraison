@@ -2,7 +2,7 @@ import {ref, set } from "firebase/database";
 import { db } from "../../firebase-config";
 
 export const AddBill=async(data,cb) => {
- let res=await set(ref(db, 'Factur/'+ data.serieColis), data);
+ let res=await set(ref(db, 'Factur/'+ data.idExpiditeuFactur), data);
  cb()
 }
 

@@ -2,10 +2,10 @@ import { equalTo, onValue, orderByChild, query, ref} from "firebase/database";
 // import { collection, getDocs, query, where } from "firebase/firestore";
 import { db } from "../../firebase-config";
 
-export  const GetRunSheets=async(id,cb,setLoading) => {
+export  const GetAllBills=async(cb,setLoading) => {
     try {
       setLoading(true)
-      const request =query(ref(db, 'Rinchit')
+      const request =query(ref(db, 'Factur')
       );
          onValue(request, (snapshot) => {
           const data = snapshot.val();
@@ -23,6 +23,7 @@ export  const GetRunSheets=async(id,cb,setLoading) => {
         
       } catch (err) {
         setLoading(false)
+
         // console.log(err.message);
 
       }

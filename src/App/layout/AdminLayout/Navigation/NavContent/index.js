@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import PerfectScrollbar from 'react-perfect-scrollbar';
+import ScrollBar from "react-perfect-scrollbar";
+import "react-perfect-scrollbar/dist/css/styles.css";
 import windowSize from 'react-window-size';
 
 import Aux from "../../../../../hoc/_Aux";
@@ -76,11 +77,11 @@ class NavContent extends Component {
         } else {
             mainContent = (
                 <div className="navbar-content datta-scroll">
-                    <PerfectScrollbar>
-                        <ul className="nav pcoded-inner-navbar">
+                    <ScrollBar >
+                        <ul   style={{ touchAction: "none" ,minHeight:"50px" }} className="nav pcoded-inner-navbar">
                             {navItems}
                         </ul>
-                    </PerfectScrollbar>
+                    </ScrollBar>
                 </div>
             );
         }
