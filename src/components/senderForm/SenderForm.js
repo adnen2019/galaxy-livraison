@@ -2,7 +2,7 @@ import { Select, Switch, notification } from 'antd';
 import React, { useEffect, useState } from 'react'
 import { AddSender } from '../../services/sender/AddSender';
 import moment from 'moment';
-import { useParams } from 'react-router-dom';
+import { useParams,useHistory } from 'react-router-dom';
 import { UpdateSender } from '../../services/sender/UpdateSender';
 const {Option}=Select
 export default function SenderForm(props) {
@@ -39,6 +39,8 @@ export default function SenderForm(props) {
     expixiteur2:"",
     
   });
+  const history=useHistory()
+
   const {id} = useParams();
   const submit =(e)=>{
     e.preventDefault()
@@ -75,6 +77,7 @@ export default function SenderForm(props) {
       })
 
     }
+    history.push("/admin/senders")
   }
   useEffect(()=>{
     if(!props.senders?.length){

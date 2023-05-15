@@ -8,7 +8,7 @@ import {PDFDownloadLink} from '@react-pdf/renderer';
 import Invoice from '../pdf/Invoice';
 
  function InvoiceModal({modalVisible,setModalVisible,bill,user}) {
- 
+ console.log(bill);
   return (
     <div>
          <Modal

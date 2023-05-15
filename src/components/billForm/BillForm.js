@@ -8,13 +8,18 @@ export default function BillForm(props) {
   const [step,setStep]=useState(0)
   const [sender,setSender]=useState(null)
   const [bill,setBill]=useState(null)
+const submit=()=>{
+  setBill(null)
+  setSender(null)
+  setStep(0)
+}
 
   return (
     <div>
       <BillFormSteps step={step} setStep={setStep} />
       {step==0&&<SendersList setBill={setBill} packages={props.packages} setStep={setStep} setSender={setSender} sendersLoad={props.sendersLoad}
               senders={props.senders} getSenders={props.getSenders} />}
-      {step==1&&<SenderPackages bill={bill} sender={sender} packagesLoad={props.packagesLoad} packages={props.packages}  />}
+      {step==1&&<SenderPackages submit={submit} bill={bill} sender={sender} packagesLoad={props.packagesLoad} packages={props.packages}  />}
 
     </div>
   )

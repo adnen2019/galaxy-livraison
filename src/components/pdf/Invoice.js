@@ -53,7 +53,30 @@ const styles = StyleSheet.create({
 export default function Invoice(props) {
   // console.log(props);
 const {nomExpiditeur,telExpiditeur,raisonSosial,idExpiditeur,adressExpiditeur,agenceExpiditeur}=props.user
-
+const{adressExpiditeurFactur,
+agenceExpiditeurFactur,
+contreRemboursemenFactur,
+dateFactur,
+etaFactur,
+factur1,
+factur2,
+factur3,
+factur4,
+factur5,
+factur6,
+fraisLivraisonFactur,
+idExpiditeuFactur,
+mentanFactur,
+montanColisCheque,
+nomExpiditeurFactur,
+nombreColisAnnulerFactur,
+nombreColisCheque,
+nombreColisLivrerFactur,
+numroFactur,
+raisonSosialExpFactur,
+referance,
+telExpiditeurFactur,
+vilExpiditeurFactur}=props.bill
   // Render the table header
   const renderTableHeader = () => {
     return (
@@ -115,7 +138,7 @@ const {nomExpiditeur,telExpiditeur,raisonSosial,idExpiditeur,adressExpiditeur,ag
             <View style={styles.font1}>
             <Text>Bon de livraison N°: </Text>
             <Text>{idExpiditeur+moment().format("MMDDHHmmssSS")} </Text>
-            <Text>Total des Colis: {props.packages.length} </Text>
+            <Text>Total des Colis: {props?.packages?.length} </Text>
 
             </View>
             <View style={styles.font1}>
@@ -130,10 +153,10 @@ const {nomExpiditeur,telExpiditeur,raisonSosial,idExpiditeur,adressExpiditeur,ag
               
             </View>
           </View>
-          <View style={styles.table}>
+          {/* <View style={styles.table}>
             {renderTableHeader()}
             {props.packages.map(renderTableRow)}
-          </View>
+          </View> */}
         </View>
       </Page>
     </Document>

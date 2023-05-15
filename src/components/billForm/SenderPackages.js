@@ -32,9 +32,27 @@ function SenderPackages(props) {
     let list = props.packages.filter((pkg) =>
     selectedRowKeys.includes(pkg.serieColis)
   );
+
+  let contreRemboursemenFactur=0
+  let fraisLivraisonFactur=0
+  let mentanFactur=0
+  let montanColisCheque=0
+  let nombreColisAnnulerFactur=0
+  let nombreColisCheque=0
+  let nombreColisLivrerFactur=0
     //for loop packages
     for (let i = 0; i < list.length; i++) {
       const element = list[i];
+      contreRemboursemenFactur+=Number(element.prisColis)
+      if(element.etatLivraison=="Livrer"||element.etatLivraison=="Echange"){
+        nombreColisLivrerFactur++
+        fraisLivraisonFactur+=Number(element.fraiLivraison)
+      }
+      else{
+        nombreColisAnnulerFactur++
+        fraisLivraisonFactur+=Number(element.fraiRetour)
+
+      }
       //change numeroFacture variable
       element.numeroFacture=props.bill.referance
       //add to finished packages
@@ -42,18 +60,23 @@ function SenderPackages(props) {
       //delete from packages
       DeletePackage(element.serieColis)
     }
+    mentanFactur=contreRemboursemenFactur-2-fraisLivraisonFactur
+
     //update bill
-    let bill=props.bill
-    bill.contreRemboursemenFactur="contreRemboursemenFactur"
-    bill.fraisLivraisonFactur="fraisLivraisonFactur"
-    bill.mentanFactur="mentanFactur"
-    bill.montanColisCheque="montanColisCheque"
-    bill.nombreColisAnnulerFactur="nombreColisAnnulerFactur"
-    bill.nombreColisCheque="nombreColisCheque"
-    bill.nombreColisLivrerFactur="nombreColisLivrerFactur"
+  let bill=props.bill
+   
+
+    bill.contreRemboursemenFactur=contreRemboursemenFactur
+    bill.fraisLivraisonFactur=fraisLivraisonFactur
+    bill.mentanFactur=mentanFactur
+    bill.montanColisCheque=montanColisCheque
+    bill.nombreColisAnnulerFactur=nombreColisAnnulerFactur
+    bill.nombreColisCheque=nombreColisCheque
+    bill.nombreColisLivrerFactur=nombreColisLivrerFactur
     UpdateBill(bill)
     //download bill
     //redirect
+    props.submit()
   }
 
   }

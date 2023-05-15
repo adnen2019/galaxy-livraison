@@ -12,9 +12,9 @@ const { Column } = Table;
       props.getSenders()
     }
   },[])
-  console.log(props);
   return (
     <div>
+      
       <Table
         // rowSelection={{
         //   selectedRowKeys,
