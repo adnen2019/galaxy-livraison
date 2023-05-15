@@ -1,8 +1,12 @@
 import { Table } from 'antd';
 import React, { useEffect } from 'react'
+import { useHistory, withRouter } from "react-router-dom";
+
 const { Column } = Table;
 
-export default function Senders(props) {
+ function Senders(props) {
+  const history=useHistory()
+
   useEffect(()=>{
     if(!props.senders?.length){
       props.getSenders()
@@ -52,8 +56,23 @@ export default function Senders(props) {
           key="agenceExpiditeur"
           responsive={["md"]}
         />
-
+<Column
+          align="center"
+          title="Actions"
+          dataIndex="Actions"
+          key="Actions"
+          render={(text, sender, index) => {
+            return (
+              <div className="">
+                <i onClick={()=>{
+                  history.push("/admin/senderForm/"+sender.idExpiditeur)
+                }} className="feather icon-edit m-1"></i>
+              </div>
+            );
+          }}
+        />
       </Table>
     </div>
   )
 }
+export default withRouter(Senders)

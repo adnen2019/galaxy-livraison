@@ -1,22 +1,18 @@
 import { Modal } from 'antd'
 import React from 'react'
-import Bill from '../pdf/Bill'
 import { CloseOutlined } from "@ant-design/icons";
 import { PDFViewer } from '@react-pdf/renderer';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import {PDFDownloadLink} from '@react-pdf/renderer';
+import Invoice from '../pdf/Invoice';
 
- function BillModal({modalVisible,setModalVisible,pkg,user,senders,isAdmin}) {
-  const printPackage=()=>{
-PDFDownloadLink(<Bill />, `${__dirname}/example.pdf`);
-
-  }
-
+ function InvoiceModal({modalVisible,setModalVisible,bill,user}) {
+ 
   return (
     <div>
          <Modal
-          title={<h5 className="m-1 text-primary"><b>Colis</b></h5>}
+          title={<h5 className="m-1 text-primary"><b>Facture</b></h5>}
           className="mt-5"
           centered
           closeIcon={
@@ -32,7 +28,7 @@ PDFDownloadLink(<Bill />, `${__dirname}/example.pdf`);
           onOk={() => setModalVisible(false)}
           onCancel={() => setModalVisible(false)}
           footer={<>
-          <PDFDownloadLink document={<Bill  senders={senders} isAdmin={isAdmin}  user={user.user} pkg={pkg} />} >
+          <PDFDownloadLink document={<Invoice user={user.user} bill={bill} />} >
           <button  className='btn btn-primary' >Imprimer</button>
           </PDFDownloadLink>
           </>}
@@ -44,12 +40,9 @@ PDFDownloadLink(<Bill />, `${__dirname}/example.pdf`);
  style={{height:"27rem"}}
   className='w-100'
    >
- <Bill  senders={senders} isAdmin={isAdmin}  user={user.user} pkg={pkg} />
+ <Invoice user={user.user} bill={bill} />
   </PDFViewer>
             </div>
-
-
-
         </Modal>
     </div>
   )
@@ -59,4 +52,4 @@ const mapStateToProps = (state) => {
     user: state.user,
   };
 };
-export default connect(mapStateToProps)(withRouter(BillModal));
+export default connect(mapStateToProps)(withRouter(InvoiceModal));

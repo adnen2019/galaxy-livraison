@@ -1,8 +1,12 @@
 import { Table } from 'antd';
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
+import InvoiceModal from './InvoiceModal';
 const { Column } = Table;
 
 export default function BillsList(props) {
+  const [modalVisible,setModalVisible]=useState(false)
+  const [bill,setBill]=useState({})
+
   useEffect(()=>{
     
 
@@ -55,8 +59,24 @@ export default function BillsList(props) {
           key="agenceExpiditeurFactur"
           responsive={["md"]}
         />
-
+   <Column
+          align="center"
+          title="Actions"
+          dataIndex="Actions"
+          key="Actions"
+          render={(text, bill, index) => {
+            return (
+              <div className="">
+                <i onClick={()=>{setBill(bill)
+                setModalVisible(true)
+                }} className="feather icon-eye m-1"></i>
+              </div>
+            );
+          }}
+        />
       </Table>
+      {modalVisible&&<InvoiceModal bill={bill} modalVisible={modalVisible} setModalVisible={setModalVisible} />}
+
     </div>
   )
 }

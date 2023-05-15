@@ -7,14 +7,14 @@ import SenderPackages from './SenderPackages'
 export default function BillForm(props) {
   const [step,setStep]=useState(0)
   const [sender,setSender]=useState(null)
-  const [billId,setBillId]=useState(null)
+  const [bill,setBill]=useState(null)
 
   return (
     <div>
       <BillFormSteps step={step} setStep={setStep} />
-      {step==0&&<SendersList setBillId={setBillId} packages={props.packages} setStep={setStep} setSender={setSender} sendersLoad={props.sendersLoad}
+      {step==0&&<SendersList setBill={setBill} packages={props.packages} setStep={setStep} setSender={setSender} sendersLoad={props.sendersLoad}
               senders={props.senders} getSenders={props.getSenders} />}
-      {step==1&&<SenderPackages billId={billId} sender={sender} packagesLoad={props.packagesLoad} packages={props.packages}  />}
+      {step==1&&<SenderPackages bill={bill} sender={sender} packagesLoad={props.packagesLoad} packages={props.packages}  />}
 
     </div>
   )

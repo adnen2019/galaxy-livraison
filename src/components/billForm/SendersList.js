@@ -28,21 +28,21 @@ export default function SendersList(props) {
         referance: sender.idExpiditeur+moment().format("yyMMDDHHmm"),
         etaFactur:"EnCour",
         numroFactur:"3",
-contreRemboursemenFactur:"0",
-factur1:"0",
-factur2:"0",
-factur3:"0",
-factur4:"0",
-factur5:"0",
-factur6:"0",
-fraisLivraisonFactur:0,
-mentanFactur:0,
+        factur1:"0",
+        factur2:"0",
+        factur3:"0",
+        factur4:"0",
+        factur5:"0",
+        factur6:"0",
+        contreRemboursemenFactur:"0",
+        fraisLivraisonFactur:0,
+        mentanFactur:0,
 montanColisCheque:"0",
 nombreColisAnnulerFactur:0,
 nombreColisCheque:"0",
 nombreColisLivrerFactur:0,
       }
-      props.setBillId(data.referance)
+      props.setBill(data)
       AddBill(data)
       props.setStep(1)
       props.setSender(sender)
@@ -62,7 +62,7 @@ nombreColisLivrerFactur:0,
   const children = []
   for (let i = 0; i < props.senders.length; i++) {
     const sender = props.senders[i]
-    let packages = props.packages.filter(p => (p.idExpiditeur == sender.idExpiditeur && (p.etatLivraison == "Livrer" || p.etatLivraison == "Annuler") && p.dateRinchit != "0"))
+    let packages = props.packages.filter(p => (p.idExpiditeur == sender.idExpiditeur && (p.etatLivraison == "Livrer" || p.etatLivraison == "Annuler"||p.etatLivraison=="Echange") && p.dateRinchit != "0"))
 
     children.push(
       <Option disabled={!packages.length} key={i} value={sender.nomExpiditeur}>

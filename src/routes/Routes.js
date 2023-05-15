@@ -49,7 +49,7 @@ export default class Routes extends Component {
       if (user?.expixiteur1 == "admin") {
         this.getAllPackages()
         // this.getBills()
-        // this.getSenders()
+        this.getSenders()
         // this.getDeliveryMen()
         // this.getRunSheets()
 
@@ -221,7 +221,7 @@ export default class Routes extends Component {
           </SenderRouter>
 
           <SenderAdminRouter isAdmin={this.user.current.expixiteur1 == "admin"} role={this.user.current.role} exact path="/admin/packages">
-            <PackageList loading={this.state.load3} packages={this.state.allPackages} userId={this.user.current.idExpiditeur} />
+            <PackageList isAdmin={this.user.current.expixiteur1 == "admin"} senders={this.state.senders} loading={this.state.load3&&this.state.sendersLoad} packages={this.state.allPackages} userId={this.user.current.idExpiditeur} />
           </SenderAdminRouter>
 
           <SenderAdminRouter isAdmin={this.user.current.expixiteur1 == "admin"} role={this.user.current.role} exact path="/admin/bills">
@@ -240,10 +240,15 @@ export default class Routes extends Component {
             {/* <PackageList loading={this.state.load3} packages={this.state.allPackages} userId={this.user.current.idExpiditeur} /> */}
           </SenderAdminRouter>
           <SenderAdminRouter isAdmin={this.user.current.expixiteur1 == "admin"} role={this.user.current.role} exact path="/admin/senderForm">
-            <SenderForm />
+            <SenderForm  sendersLoad={this.state.sendersLoad}
+              senders={this.state.senders} getSenders={this.getSenders}   />
             {/* <PackageList loading={this.state.load3} packages={this.state.allPackages} userId={this.user.current.idExpiditeur} /> */}
           </SenderAdminRouter>
-
+          <SenderAdminRouter isAdmin={this.user.current.expixiteur1 == "admin"} role={this.user.current.role} exact path="/admin/senderForm/:id">
+            <SenderForm  sendersLoad={this.state.sendersLoad}
+              senders={this.state.senders} getSenders={this.getSenders}   />
+            {/* <PackageList loading={this.state.load3} packages={this.state.allPackages} userId={this.user.current.idExpiditeur} /> */}
+          </SenderAdminRouter>
           <SenderAdminRouter isAdmin={this.user.current.expixiteur1 == "admin"} role={this.user.current.role} exact path="/admin/deliveryMen">
             <DeliveryMen deliveryMenLoad={this.state.deliveryMenLoad}
               deliveryMen={this.state.deliveryMen} getDeliveryMen={this.getDeliveryMen} />

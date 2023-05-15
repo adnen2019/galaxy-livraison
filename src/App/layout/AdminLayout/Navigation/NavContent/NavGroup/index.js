@@ -63,27 +63,28 @@ const adminRoutes=[{
         type: 'item',
         url: '/admin/deliveryMen',
         icon: 'feather icon-list',
-    },{
-        id: 'admin',
-        title: 'Ajouter livreur',
-        type: 'item',
-        url: '/admin/deliveryManForm',
-        icon: 'feather icon-plus-square',
-    },
+    }
+    // ,{
+    //     id: 'admin',
+    //     title: 'Ajouter livreur',
+    //     type: 'item',
+    //     url: '/admin/deliveryManForm',
+    //     icon: 'feather icon-plus-square',
+    // },
 
-    {
-        id: 'admin',
-        title: 'Liste des runsheet',
-        type: 'item',
-        url: '/admin/runSheets',
-        icon: 'feather icon-list',
-    },{
-        id: 'admin',
-        title: 'Ajouter runsheet',
-        type: 'item',
-        url: '/admin/runSheetForm',
-        icon: 'feather icon-plus-square',
-    },
+    // {
+    //     id: 'admin',
+    //     title: 'Liste des runsheet',
+    //     type: 'item',
+    //     url: '/admin/runSheets',
+    //     icon: 'feather icon-list',
+    // },{
+    //     id: 'admin',
+    //     title: 'Ajouter runsheet',
+    //     type: 'item',
+    //     url: '/admin/runSheetForm',
+    //     icon: 'feather icon-plus-square',
+    // },
 
 ]
     return (

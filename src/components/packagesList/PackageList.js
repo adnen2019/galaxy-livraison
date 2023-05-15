@@ -193,10 +193,17 @@ function PackageList(props) {
           dataIndex="serieColis"
           key="serieColis"
         />
-
+<Column
+          align="center"
+          sorter={(a, b) => a.nomDistinateur.localeCompare(b.nomDistinateur)}
+          // responsive={['lg']}
+          title="Destinateur"
+          dataIndex="nomDistinateur"
+          key="nomDistinateur"
+        />
         <Column
           align="center"
-          sorter={(a, b) => a.telDistinatair.toString().localeCompare(b.telDistinatair.toString())}
+          sorter={(a, b) => a.nomDistinateur.localeCompare(b.nomDistinateur)}
           // responsive={['lg']}
           title="Téléphone"
           dataIndex="telDistinatair"
@@ -267,7 +274,7 @@ function PackageList(props) {
       selectedRowKeys.includes(pkg.serieColis)
     )} />} > */}
           {/* </PDFDownloadLink> */}
-         <PDFDownloadLink document={<Bills user={props.user.user} packages={download} />} fileName="document.pdf">
+         <PDFDownloadLink document={<Bills  senders={props.senders} isAdmin={props.isAdmin}  user={props.user.user} packages={download} />} fileName="document.pdf">
           <button  className='btn btn-primary rounded' >Imprimer</button>
     </PDFDownloadLink>
     <PDFDownloadLink document={ <PackagesList user={props.user.user} packages={download} />} fileName="document.pdf">
@@ -275,7 +282,7 @@ function PackageList(props) {
     </PDFDownloadLink>
     
       </div>
-      {modalVisible&&<BillModal pkg={pkg} modalVisible={modalVisible} setModalVisible={setModalVisible} />}
+      {modalVisible&&<BillModal senders={props.senders} isAdmin={props.isAdmin} pkg={pkg} modalVisible={modalVisible} setModalVisible={setModalVisible} />}
       
   
     </>

@@ -90,7 +90,14 @@ function Bill(props) {
     villExpiditeur,
     detailColi,
   } = props.pkg;
-  
+  let raisonSosial=props?.user?.raisonSosial
+  let emailExpiditeur=props?.user?.emailExpiditeur
+  if(props.isAdmin){
+    let sender=props.senders.find(s=>s.idExpiditeur==props.pkg.idExpiditeur)
+    raisonSosial=sender.raisonSosial
+    emailExpiditeur=sender.emailExpiditeur
+  }
+
   const qrCodeComponent = <QRCode value={serieColis} />;
 
   const qrCodeComponentStaticMarkup = renderToStaticMarkup(qrCodeComponent);
@@ -112,7 +119,7 @@ function Bill(props) {
               <Text>Nom et Prenom: {nomExpiditeur}</Text>
               {/* store */}
               <Text>Raison sociale: 
-                {props?.user?.raisonSosial}
+                {raisonSosial}
                 </Text>
 
               <Text>Agence: {villExpiditeur}</Text>
@@ -120,7 +127,7 @@ function Bill(props) {
 
               {/* store */}
               <Text>Email: 
-                {props?.user?.emailExpiditeur}
+                {emailExpiditeur}
                 </Text>
             </View>
             <View style={styles.column}>

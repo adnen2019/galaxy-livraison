@@ -11,6 +11,7 @@ import { PDFDownloadLink, PDFViewer } from "@react-pdf/renderer";
 import PackagesList from "../pdf/PackagesList";
 import Bills from "../pdf/Bills";
 import { AddFinishedPackage } from "../../services/package/AddFinishedPackage";
+import { UpdateBill } from "../../services/bill/UpdateBill";
 const { Column } = Table;
 const { Option } = Select;
 
@@ -35,15 +36,26 @@ function SenderPackages(props) {
     for (let i = 0; i < list.length; i++) {
       const element = list[i];
       //change numeroFacture variable
-      element.numeroFacture=props.billId
+      element.numeroFacture=props.bill.referance
       //add to finished packages
       AddFinishedPackage(element)
       //delete from packages
       DeletePackage(element.serieColis)
     }
+    //update bill
+    let bill=props.bill
+    bill.contreRemboursemenFactur="contreRemboursemenFactur"
+    bill.fraisLivraisonFactur="fraisLivraisonFactur"
+    bill.mentanFactur="mentanFactur"
+    bill.montanColisCheque="montanColisCheque"
+    bill.nombreColisAnnulerFactur="nombreColisAnnulerFactur"
+    bill.nombreColisCheque="nombreColisCheque"
+    bill.nombreColisLivrerFactur="nombreColisLivrerFactur"
+    UpdateBill(bill)
+    //download bill
+    //redirect
   }
 
-    //download bill
   }
 
   const deletePackage=(pkg)=>{
@@ -131,7 +143,7 @@ function SenderPackages(props) {
 //       setFilteredPackages(props.packages.filter((p) => p.etatLivraison == value));
 //   };
   useEffect(() => {
-    let packages=props.packages.filter(p=>(p.idExpiditeur==props.sender.idExpiditeur&&(p.etatLivraison=="Livrer"||p.etatLivraison=="Annuler")&&p.dateRinchit!="0"))
+    let packages=props.packages.filter(p=>(p.idExpiditeur==props.sender.idExpiditeur&&(p.etatLivraison=="Livrer"||p.etatLivraison=="Annuler"||p.etatLivraison=="Echange")&&p.dateRinchit!="0"))
     handlePackages(packages);
   }, [props.packages]);
   let filteredData=filteredPackages
