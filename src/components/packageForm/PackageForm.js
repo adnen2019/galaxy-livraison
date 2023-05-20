@@ -197,6 +197,7 @@ e.preventDefault()
   "Jendouba",
   "Kairouan",
   "Kasserine",
+  "Kebili",
   "Kef",
   "Kelibia",
   "Manouba",

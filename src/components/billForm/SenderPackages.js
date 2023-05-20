@@ -46,7 +46,11 @@ function SenderPackages(props) {
       contreRemboursemenFactur+=Number(element.prisColis)
       if(element.etatLivraison=="Livrer"||element.etatLivraison=="Echange"){
         nombreColisLivrerFactur++
+      if(element.naturColis=="Gros Colis"){
+        fraisLivraisonFactur+=Number(element.fraiLivExtra)
+      }else{
         fraisLivraisonFactur+=Number(element.fraiLivraison)
+      }
       }
       else{
         nombreColisAnnulerFactur++

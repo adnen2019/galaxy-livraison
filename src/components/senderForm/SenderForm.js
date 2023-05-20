@@ -100,6 +100,7 @@ const children = [];
   "Jendouba",
   "Kairouan",
   "Kasserine",
+  "Kebili",
   "Kef",
   "Kelibia",
   "Manouba",
