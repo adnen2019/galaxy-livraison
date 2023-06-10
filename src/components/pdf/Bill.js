@@ -89,6 +89,7 @@ function Bill(props) {
     numeroExpiditeur,
     villExpiditeur,
     detailColi,
+    echangColis
   } = props.pkg;
   let raisonSosial=props?.user?.raisonSosial
   let emailExpiditeur=props?.user?.emailExpiditeur
@@ -182,6 +183,7 @@ function Bill(props) {
             <View style={styles.column}>
             <Text>{dicriptionColis}</Text>
             <Text>Poids: {detailColi}</Text>
+            <Text>{echangColis=="Livraison Normal"?"Livraison Normal":"Echange"}</Text>
           
             </View>
           </View>
